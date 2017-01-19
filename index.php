@@ -12,17 +12,22 @@ if (isset($_POST['form_post']) == true)
 
 function validation($name, $form_body) 
 {
-  if ($name == '' || $form_body == '') {
-    $result = false;
-  } else {
-    $result = true;
+  $result = true;
+
+  if ($name == '') {
+    $result == false;
   }
 
-  if($result == true)
-  {
-    return true;
+  if ($form_body == '') {
+    $result == false;
   }
+  return $result;
 }
+
+// function pagination()
+// {
+//   $page_num = $con->prepare("SELECT COUNT(*) id FROM post")
+// }
 
 $validate = validation($name, $form_body);
 
@@ -139,9 +144,3 @@ $output = $sth->fetchAll(PDO::FETCH_ASSOC);
                 </div>
               </div>
           -->
-
-
-
-
-
-
