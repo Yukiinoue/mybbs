@@ -10,19 +10,37 @@ if (isset($_POST['form_post']) == true)
   $post_date = date('Y年m月d日 H:i');
 }
 
+// フォームのバリデーション
 function validation($name, $form_body) 
 {
   $result = true;
-
   if ($name == '') {
-    $result == false;
+    $result = false;
+    $error_msg[0] = '名前が入力されていません。';
   }
 
   if ($form_body == '') {
-    $result == false;
+    $result = false;
+    $error_msg[1] = '本文が入力されていません。';
   }
-  return $result;
+
+  if ($result == true) {
+    return $result;
+  } elseif ($result == false) {
+    return $error_msg;
+  }
 }
+
+// function message ($result)
+// {
+//   if ($result === true) {
+//      return '投稿が完了しました。';
+//   } else if(isset($result)){
+//     foreach ($result as $value) {
+//       var_dump($value) ;
+//     }
+//   }
+// }
 
 // function pagination()
 // {
@@ -30,26 +48,16 @@ function validation($name, $form_body)
 // }
 
 $validate = validation($name, $form_body);
-
-if ($validate == true) {
+// $msg = message($validate);
+// 投稿をDBへ保存 
+if ($validate === true) {
   $stm = $con->prepare("INSERT INTO post(name,form_body,post_date) values(:name,:form_body,:post_date)");
 
   $stm->bindValue(':name', $name);
   $stm->bindValue(':form_body', $form_body);
   $stm->bindValue(':post_date', $post_date);
   $result = $stm->execute();
-
-  if ($result == true) {
-    $msg = "書き込みが完了しました。";
-    } else {
-      $err_msg ="書き込みに失敗しました。";
-    }
-} else {
-  $err_msg = "名前と本文を入力してください。"; 
-  }
-
-echo $err_msg;
-  
+}  
 // 投稿一覧を出力
 $sth = $con->prepare("SELECT * FROM post ORDER BY id DESC");
 
@@ -67,7 +75,7 @@ $output = $sth->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>井上のBBS</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="css/common.css">
   </head>
   <body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -79,6 +87,15 @@ $output = $sth->fetchAll(PDO::FETCH_ASSOC);
         <div class="form-wrap">
           <form action="index.php" method="post" accept-charset="utf-8">
             <h2 class="sub-ttl">投稿フォーム</h2>
+            <?php 
+            if ($validate === true) {
+              echo '<span class="suc-msg">投稿を送信しました。</span>';
+            } else if(isset($validate)) {
+              foreach ($validate as $value) {
+              echo '<span class="err-msg">'.$value.'</span><br>';  
+              }
+            }
+            ?>
               <div class="text-box form-group">
                 <span class="form-item">名前</span>
                 <input class="form-text form-control" type="text" name="name"><br>
