@@ -2,12 +2,9 @@
 ini_set("display_errors", "On");//エラー表示ON
 error_reporting(E_ALL);
 
-require "validation.php";
+session_start();
 
 $con = new PDO('mysql:host=localhost;dbname=mybbs;charset=utf8','appuser','eDZNQ7ZnMuDm');
-
-
-
 // // 削除機能
 // if(isset($_POST['id'])){
 //   delete($_POST['id']);
@@ -68,10 +65,10 @@ $output = $sth->fetchAll(PDO::FETCH_ASSOC);
           <form action="post.php" method="post" accept-charset="utf-8">
             <h2 class="sub-ttl">投稿フォーム</h2>
             <?php 
-            if ($validate === true) {
+            if (isset($_SESSION['result'])) {
               echo '<span class="suc-msg">投稿を送信しました。</span>';
-            } else if(isset($validate)) {
-              foreach ($validate as $value) {
+            } else if(isset($_SESSION['error_msg'])) {
+              foreach ($_SESSION['error_msg'] as $value) {
               echo '<span class="err-msg">'.$value.'</span><br>';  
               }
             }

@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 // フォームのバリデーション
 function validation($name, $form_body) 
@@ -15,8 +16,8 @@ function validation($name, $form_body)
   }
 
   if ($result == true) {
-    return $result;
+    return $_SESSION['result'] = $result;
   } elseif ($result == false) {
-    return $error_msg;
+    return $_SESSION['error_msg'] = $error_msg;
   }
 }

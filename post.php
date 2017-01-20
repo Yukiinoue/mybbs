@@ -1,6 +1,8 @@
 <?php
+header("Location: /mybbs/index.php");
 
 require "validation.php";
+
 // 投稿をDBへ書き込み
 if (isset($_POST['form_post']) === true) 
 {
@@ -19,3 +21,4 @@ if ($validate === true) {
   $stm->bindValue(':post_date', $post_date);
   $result = $stm->execute();
 }
+
