@@ -59,6 +59,8 @@ $output = $sth->fetchAll(PDO::FETCH_ASSOC);
               <div class="text-box form-group">
                 <span class="form-item">本文</span><br>
                 <textarea class="form-body" name="form_body" cols="68" rows="10"></textarea><br>
+                <span class="form-item">パスワード</span><br>
+                <input class="form-password from-control" type="password" name="password"><br>
                 <span class="post-btn">
                   <input class="form-text" type="submit" name="form_post" value="投稿">
                 </span>
@@ -68,7 +70,7 @@ $output = $sth->fetchAll(PDO::FETCH_ASSOC);
         <h2 class="sub-ttl">投稿一覧</h2>      
         <?php 
           for ($i=0; $i < count($output); $i++) { 
-          echo '<div class="post-list"><span id="'.$output[$i]['id'].'"class="post-number">No:'.$output[$i]['id'].'<br><span class="post-name">名前:'.$output[$i]['name'].'</span><span class="post-date">'.$output[$i]['post_date'].'</span><br><p class="post-body">'.$output[$i]['form_body'].'</p><br><a href="reply.php"><span class="reply">返信する</span></a></div><form action="delete.php" method="post"><input type="hidden" name="post_id" value="'.$output[$i]['id'].'"><button class="delete-btn"type="submit" name="delete_btn">削除</button></form>';
+          echo '<div class="post-list"><span id="'.$output[$i]['id'].'"class="post-number">No:'.$output[$i]['id'].'<br><span class="post-name">名前:'.$output[$i]['name'].'</span><span class="post-date">'.$output[$i]['post_date'].'</span><br><p class="post-body">'.$output[$i]['form_body'].'</p><br><a href="reply.php"><span class="reply">返信する</span></a></div><form action="delete.php" method="post"><input type="hidden" name="post_id" value="'.$output[$i]['id'].'"><button class="delete-btn"type="submit" name="delete_btn">削除</button></form><form action="edit.php" method="post"><input type="hidden" name="post_id alue="'.$output[$i]['id'].'"><button class="edit_btn" type="submit" name="edit_btn">編集</button>';
           }
         ?>
         <div class="form-wrap">
