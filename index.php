@@ -113,7 +113,9 @@ $output = $sth->fetchAll(PDO::FETCH_ASSOC);
     </div>
   </body>
 </html>
-
+<?php
+session_destroy();
+?>
           <!-- 返信ボタン
               <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#sampleModal" data-recipient="受信者名">
               返信する
