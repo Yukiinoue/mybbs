@@ -3,16 +3,10 @@ ini_set("display_errors", "On");//エラー表示ON
 error_reporting(E_ALL);
 
 require "validation.php";
+require "post.php";
 
 $con = new PDO('mysql:host=localhost;dbname=mybbs;charset=utf8','appuser','eDZNQ7ZnMuDm');
 
-// 投稿をDBへ書き込み
-if (isset($_POST['form_post']) === true) 
-{
-  $name = $_POST['name'];
-  $form_body = $_POST['form_body'];
-  $post_date = date('Y年m月d日 H:i');
-}
 
 
 // // 削除機能
@@ -27,10 +21,6 @@ if (isset($_POST['form_post']) === true)
 //   $result = $del->execute();
 // }
 
-
-
-
-// 
 // function message ($result)
 // {
 //   if ($result === true) {
@@ -47,18 +37,10 @@ if (isset($_POST['form_post']) === true)
 //   $page_num = $con->prepare("SELECT COUNT(*) id FROM post")
 // }
 
-  $validate = validation($name, $form_body);
+$validate = validation($name, $form_body);
 
 // $msg = message($validate);
-// 投稿をDBへ保存 
-if ($validate === true) {
-  $stm = $con->prepare("INSERT INTO post(name,form_body,post_date) values(:name,:form_body,:post_date)");
-
-  $stm->bindValue(':name', $name);
-  $stm->bindValue(':form_body', $form_body);
-  $stm->bindValue(':post_date', $post_date);
-  $result = $stm->execute();
-}  
+  
 // 投稿一覧を出力
 $sth = $con->prepare("SELECT * FROM post ORDER BY id DESC");
 
@@ -86,7 +68,7 @@ $output = $sth->fetchAll(PDO::FETCH_ASSOC);
       <div class="row wrapper">
         <h1 id="form-ttl">井上のBBS</h1>
         <div class="form-wrap">
-          <form action="index.php" method="post" accept-charset="utf-8">
+          <form action="post.php" method="post" accept-charset="utf-8">
             <h2 class="sub-ttl">投稿フォーム</h2>
             <?php 
             if ($validate === true) {
@@ -118,7 +100,7 @@ $output = $sth->fetchAll(PDO::FETCH_ASSOC);
           }
         ?>
         <div class="form-wrap">
-          <form action="index.php" method="post" accept-charset="utf-8">
+          <form action="post.php" method="post" accept-charset="utf-8">
             <h2 class="sub-ttl">投稿フォーム</h2>
               <div class="text-box form-group">
                 <span class="form-item">名前</span>
