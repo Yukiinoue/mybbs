@@ -1,0 +1,18 @@
+@charset utf-8;
+
+/*----- #all -----*/
+#all {
+  width: 100%;
+  }
+/*----- .wrapper -----*/
+.wrapper {
+  width: 500px;
+  margin: 0 auto;
+  }
+
+
+
+  /* .err-msg */
+  .err-msg {
+    color: #c0392b;
+    }

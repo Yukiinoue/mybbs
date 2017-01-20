@@ -1,36 +1,36 @@
 <?php
+ini_set("display_errors", "On");//エラー表示ON
+error_reporting(E_ALL);
+
+require "validation.php";
 
 $con = new PDO('mysql:host=localhost;dbname=mybbs;charset=utf8','appuser','eDZNQ7ZnMuDm');
 
 // 投稿をDBへ書き込み
-if (isset($_POST['form_post']) == true) 
+if (isset($_POST['form_post']) === true) 
 {
   $name = $_POST['name'];
   $form_body = $_POST['form_body'];
   $post_date = date('Y年m月d日 H:i');
 }
 
-// フォームのバリデーション
-function validation($name, $form_body) 
-{
-  $result = true;
-  if ($name == '') {
-    $result = false;
-    $error_msg[0] = '名前が入力されていません。';
-  }
 
-  if ($form_body == '') {
-    $result = false;
-    $error_msg[1] = '本文が入力されていません。';
-  }
+// // 削除機能
+// if(isset($_POST['id'])){
+//   delete($_POST['id']);
+// }
+// function delete($id)
+// {
+//   $del = $con->prepare("DELTE FROM post WHERE id=:id");
 
-  if ($result == true) {
-    return $result;
-  } elseif ($result == false) {
-    return $error_msg;
-  }
-}
+//   $del->bindValue(':id', $id);
+//   $result = $del->execute();
+// }
 
+
+
+
+// 
 // function message ($result)
 // {
 //   if ($result === true) {
@@ -47,7 +47,8 @@ function validation($name, $form_body)
 //   $page_num = $con->prepare("SELECT COUNT(*) id FROM post")
 // }
 
-$validate = validation($name, $form_body);
+  $validate = validation($name, $form_body);
+
 // $msg = message($validate);
 // 投稿をDBへ保存 
 if ($validate === true) {
@@ -112,7 +113,7 @@ $output = $sth->fetchAll(PDO::FETCH_ASSOC);
         <h2 class="sub-ttl">投稿一覧</h2>      
         <?php 
           for ($i=0; $i < count($output); $i++) { 
-          echo '<div class="post-list"><span id="'.$output[$i]['id'].'"class="post-number">No:'.$output[$i]['id'].'<br><span class="post-name">名前:'.$output[$i]['name'].'</span><span class="post-date">'.$output[$i]['post_date'].'</span><br><p class="post-body">'.$output[$i]['form_body'].'</p><br><a href="reply.php"><span class="reply">返信する</span></a>';
+          echo '<div class="post-list"><span id="'.$output[$i]['id'].'"class="post-number">No:'.$output[$i]['id'].'<br><span class="post-name">名前:'.$output[$i]['name'].'</span><span class="post-date">'.$output[$i]['post_date'].'</span><br><p class="post-body">'.$output[$i]['form_body'].'</p><br><a href="reply.php"><span class="reply">返信する</span></a></div>';
           $num_id = $output[$i]['id'];
           }
         ?>
