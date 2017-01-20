@@ -6,28 +6,6 @@ session_start();
 
 $con = new PDO('mysql:host=localhost;dbname=mybbs;charset=utf8','appuser','eDZNQ7ZnMuDm');
 
-// // 削除機能
-// if(isset($_POST['id'])){
-//   delete($_POST['id']);
-// }
-// function delete($id)
-// {
-//   $del = $con->prepare("DELTE FROM post WHERE id=:id");
-
-//   $del->bindValue(':id', $id);
-//   $result = $del->execute();
-// }
-
-// function message ($result)
-// {
-//   if ($result === true) {
-//      return '投稿が完了しました。';
-//   } else if(isset($result)){
-//     foreach ($result as $value) {
-//       var_dump($value) ;
-//     }
-//   }
-// }
 
 // function pagination()
 // {
@@ -90,8 +68,7 @@ $output = $sth->fetchAll(PDO::FETCH_ASSOC);
         <h2 class="sub-ttl">投稿一覧</h2>      
         <?php 
           for ($i=0; $i < count($output); $i++) { 
-          echo '<div class="post-list"><span id="'.$output[$i]['id'].'"class="post-number">No:'.$output[$i]['id'].'<br><span class="post-name">名前:'.$output[$i]['name'].'</span><span class="post-date">'.$output[$i]['post_date'].'</span><br><p class="post-body">'.$output[$i]['form_body'].'</p><br><a href="reply.php"><span class="reply">返信する</span></a></div>';
-          $num_id = $output[$i]['id'];
+          echo '<div class="post-list"><span id="'.$output[$i]['id'].'"class="post-number">No:'.$output[$i]['id'].'<br><span class="post-name">名前:'.$output[$i]['name'].'</span><span class="post-date">'.$output[$i]['post_date'].'</span><br><p class="post-body">'.$output[$i]['form_body'].'</p><br><a href="reply.php"><span class="reply">返信する</span></a></div><form action="delete.php" method="post"><input type="hidden" name="post_id" value="'.$output[$i]['id'].'"><button class="delete-btn"type="submit" name="delete_btn">削除</button></form>';
           }
         ?>
         <div class="form-wrap">

@@ -3,6 +3,8 @@ session_start();
 
 require "validation.php";
 
+$con = new PDO('mysql:host=localhost;dbname=mybbs;charset=utf8','appuser','eDZNQ7ZnMuDm');
+
 // 投稿をDBへ書き込み
 if (isset($_POST['form_post']) === true) 
 {
