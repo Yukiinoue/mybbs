@@ -1,5 +1,5 @@
 <?php
-header("Location: /mybbs/index.php");
+session_start();
 
 require "validation.php";
 
@@ -12,6 +12,10 @@ if (isset($_POST['form_post']) === true)
 }
 
 $validate = validation($name, $form_body);
+
+$_SESSION['result'] = $validate;
+
+
 // 投稿をDBへ保存 
 if ($validate === true) {
   $stm = $con->prepare("INSERT INTO post(name,form_body,post_date) values(:name,:form_body,:post_date)");
@@ -22,3 +26,4 @@ if ($validate === true) {
   $result = $stm->execute();
 }
 
+header("Location: /mybbs/index.php");
