@@ -3,7 +3,6 @@ ini_set("display_errors", "On");//エラー表示ON
 error_reporting(E_ALL);
 
 require "validation.php";
-require "post.php";
 
 $con = new PDO('mysql:host=localhost;dbname=mybbs;charset=utf8','appuser','eDZNQ7ZnMuDm');
 
@@ -36,8 +35,6 @@ $con = new PDO('mysql:host=localhost;dbname=mybbs;charset=utf8','appuser','eDZNQ
 // {
 //   $page_num = $con->prepare("SELECT COUNT(*) id FROM post")
 // }
-
-$validate = validation($name, $form_body);
 
 // $msg = message($validate);
   

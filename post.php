@@ -1,5 +1,6 @@
 <?php
 
+require "validation.php";
 // 投稿をDBへ書き込み
 if (isset($_POST['form_post']) === true) 
 {
@@ -8,6 +9,7 @@ if (isset($_POST['form_post']) === true)
   $post_date = date('Y年m月d日 H:i');
 }
 
+$validate = validation($name, $form_body);
 // 投稿をDBへ保存 
 if ($validate === true) {
   $stm = $con->prepare("INSERT INTO post(name,form_body,post_date) values(:name,:form_body,:post_date)");
