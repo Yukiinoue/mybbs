@@ -48,15 +48,13 @@ $output = $sth->fetchAll(PDO::FETCH_ASSOC);
         <div class="form-wrap">
           <form action="post.php" method="post" accept-charset="utf-8">
             <h2 class="sub-ttl">投稿フォーム</h2>
-            <?php 
-            if ($message === true) {
-              echo '<span class="suc-msg">投稿を送信しました。</span>';
-            } else if(isset($message)) {
-              foreach ($message as $value) {
-              echo '<span class="err-msg">'.$value.'</span><br>';  
-              }
-            }
-            ?>
+            <?php if($message === true):?>
+              <span class="success-message">投稿を送信しました。</span>
+            <?php elseif(isset($message)) :?>
+            <?php foreach ($message as $value):?>
+              <span class="error-message"><?php echo $value ?></span><br>
+            <?php endforeach ?>
+            <?php endif ?>
               <div class="text-box form-group">
                 <span class="form-item">名前</span>
                 <input class="form-text form-control" type="text" name="name"><br>
