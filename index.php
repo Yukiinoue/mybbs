@@ -6,6 +6,7 @@ session_start();
 
 $con = new PDO('mysql:host=localhost;dbname=mybbs;charset=utf8','appuser','eDZNQ7ZnMuDm');
 
+$message = $_SESSION['result'];
 
 // function pagination()
 // {
@@ -21,8 +22,6 @@ $sth->execute();
 
 $output = $sth->fetchAll(PDO::FETCH_ASSOC);
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -44,10 +43,10 @@ $output = $sth->fetchAll(PDO::FETCH_ASSOC);
           <form action="post.php" method="post" accept-charset="utf-8">
             <h2 class="sub-ttl">投稿フォーム</h2>
             <?php 
-            if ($_SESSION['result'] === true) {
+            if ($message === true) {
               echo '<span class="suc-msg">投稿を送信しました。</span>';
-            } else if(isset($_SESSION['result'])) {
-              foreach ($_SESSION['result'] as $value) {
+            } else if(isset($message)) {
+              foreach ($message as $value) {
               echo '<span class="err-msg">'.$value.'</span><br>';  
               }
             }
@@ -93,9 +92,6 @@ $output = $sth->fetchAll(PDO::FETCH_ASSOC);
     </div>
   </body>
 </html>
-<?php
-session_destroy();
-?>
           <!-- 返信ボタン
               <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#sampleModal" data-recipient="受信者名">
               返信する
