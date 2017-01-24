@@ -10,7 +10,6 @@
   <body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <!-- <script src="js/reply.js"></script> -->
     <div id="all">
       <div class="row wrapper">
         <h1 id="form-ttl">井上のBBS</h1>
@@ -39,24 +38,24 @@
             </div>
           </form>  
         </div>
-        <h2 class="sub-ttl">投稿一覧</h2>     
-        {% for output in row %}
-        <div class="post-list">
-          <span id="{{ row.id }}" class="post-number">No:{{ row.id }}</span><br>
-          <span class="post-name">名前:{{ row.name }}</span>
-          <span class="post-date">{{ row.post_date }}</span><br>
-          <p class="post-body">{{ row.form_body }}</p><br>
-          <a href="reply.php">
-            <span class="reply">返信する</span>
-          </a>
-        </div>
-        <form action="delete.php" method="post"><input type="hidden" name="post_id" value="{{ row.id }}">
-          <button class="delete-btn" type="submit" name="delete_btn">削除</button>
-        </form>
-        <form action="edit.php" method="post">
-          <input type="hidden" name="post_id" value="{{ row.id }}">
-          <button class="edit_btn" type="submit" name="edit_btn">編集</button>
-        </form>
+        <h2 class="sub-ttl">投稿一覧</h2>
+        {% for row in output %}
+          <div class="post-list">
+            <span id="{{ row.id }}" class="post-number">No:{{ row.id }}</span><br>
+            <span class="post-name">名前:{{ row.name }}</span>
+            <span class="post-date">{{ row.post_date }}</span><br>
+            <p class="post-body">{{ row.form_body }}</p><br>
+            <a href="reply.php">
+              <span class="reply">返信する</span>
+            </a>
+          </div>
+          <form action="delete.php" method="post"><input type="hidden" name="post_id" value="{{ row.id }}">
+            <button class="delete-btn" type="submit" name="delete_btn">削除</button>
+          </form>
+          <form action="edit.php" method="post">
+            <input type="hidden" name="post_id" value="{{ row.id }}">
+            <button class="edit_btn" type="submit" name="edit_btn">編集</button>
+          </form>
         {% endfor %}
       </div>
     </div>
