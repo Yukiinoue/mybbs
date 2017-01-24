@@ -74,9 +74,9 @@ $output = $sth->fetchAll(PDO::FETCH_ASSOC);
         <?php foreach ($output as $row):?>    
         <div class="post-list">
           <span id="<?php echo $row['id'] ?>"class="post-number">No:<?php echo $row['id']?><br>
-          <span class="post-name">名前:<?php echo $row['name']?></span>
+          <span class="post-name">名前:<?php echo htmlspecialchars($row['name'])?></span>
           <span class="post-date"><?php echo $row['post_date']?></span><br>
-          <p class="post-body"><?php echo $row['form_body']?></p><br>
+          <p class="post-body"><?php echo htmlspecialchars($row['form_body'])?></p><br>
           <a href="reply.php">
             <span class="reply">返信する</span>
           </a>
