@@ -6,8 +6,13 @@ session_start();
 
 $con = new PDO('mysql:host=localhost;dbname=mybbs;charset=utf8','appuser','eDZNQ7ZnMuDm');
 
-$message = $_SESSION['result'];
-unset($_SESSION['result']);
+$message = null;
+
+if (isset($_SESSION['result'])) {
+  $message = $_SESSION['result'];
+  unset($_SESSION['result']);
+} 
+
 // function pagination()
 // {
 //   $page_num = $con->prepare("SELECT COUNT(*) id FROM post")
