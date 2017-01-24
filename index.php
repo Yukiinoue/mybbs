@@ -11,7 +11,7 @@ $message = null;
 if (isset($_SESSION['result'])) {
   $message = $_SESSION['result'];
   unset($_SESSION['result']);
-} 
+}
 
 // function pagination()
 // {
@@ -73,11 +73,9 @@ $output = $sth->fetchAll(PDO::FETCH_ASSOC);
           </form>  
         </div>
         <h2 class="sub-ttl">投稿一覧</h2>      
-        <?php 
-          for ($i=0; $i < count($output); $i++) { 
-          echo '<div class="post-list"><span id="'.$output[$i]['id'].'"class="post-number">No:'.$output[$i]['id'].'<br><span class="post-name">名前:'.$output[$i]['name'].'</span><span class="post-date">'.$output[$i]['post_date'].'</span><br><p class="post-body">'.$output[$i]['form_body'].'</p><br><a href="reply.php"><span class="reply">返信する</span></a></div><form action="delete.php" method="post"><input type="hidden" name="post_id" value="'.$output[$i]['id'].'"><button class="delete-btn"type="submit" name="delete_btn">削除</button></form><form action="edit.php" method="post"><input type="hidden" name="post_id alue="'.$output[$i]['id'].'"><button class="edit_btn" type="submit" name="edit_btn">編集</button>';
-          }
-        ?>
+        <?php foreach ($output as $row):?>    
+        <?php echo '<div class="post-list"><span id="'.$row['id'].'"class="post-number">No:'.$row['id'].'<br><span class="post-name">名前:'.$row['name'].'</span><span class="post-date">'.$row['post_date'].'</span><br><p class="post-body">'.$row['form_body'].'</p><br><a href="reply.php"><span class="reply">返信する</span></a></div><form action="delete.php" method="post"><input type="hidden" name="post_id" value="'.$row['id'].'"><button class="delete-btn"type="submit" name="delete_btn">削除</button></form><form action="edit.php" method="post"><input type="hidden" name="post_id alue="'.$row['id'].'"><button class="edit_btn" type="submit" name="edit_btn">編集</button>';?>
+        <?php endforeach ?>
         <div class="form-wrap">
           <form action="post.php" method="post" accept-charset="utf-8">
             <h2 class="sub-ttl">投稿フォーム</h2>
