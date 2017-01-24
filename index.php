@@ -7,9 +7,7 @@ error_reporting(E_ALL);
 require 'vendor/autoload.php';
 $loader = new Twig_Loader_Filesystem('templates');
 $twig = new Twig_Environment($loader);
-$template = $twig->load('index.html');
 
-echo $template->render(['output' => $output, 'message' => $message]);
 
 session_start();
 
@@ -35,3 +33,6 @@ $sth = $con->prepare("SELECT * FROM post ORDER BY id DESC");
 $sth->execute();
 
 $output = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+$template = $twig->load('index.html');
+echo $template->render(['output' => $output, 'message' => $message]);
