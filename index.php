@@ -7,7 +7,7 @@ session_start();
 $con = new PDO('mysql:host=localhost;dbname=mybbs;charset=utf8','appuser','eDZNQ7ZnMuDm');
 
 $message = $_SESSION['result'];
-
+unset($_SESSION['result']);
 // function pagination()
 // {
 //   $page_num = $con->prepare("SELECT COUNT(*) id FROM post")
@@ -21,6 +21,7 @@ $sth = $con->prepare("SELECT * FROM post ORDER BY id DESC");
 $sth->execute();
 
 $output = $sth->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
