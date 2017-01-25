@@ -16,6 +16,7 @@ $twig->addExtension(new Twig_Extension_Debug());
 // DB接続
 $con = new PDO('mysql:host=localhost;dbname=mybbs;charset=utf8','appuser','eDZNQ7ZnMuDm');
 
+// バリデーションメッセージの受け取り、変数格納
 $message = null;
 
 if (isset($_SESSION['result'])) {
