@@ -41,14 +41,14 @@
         <h2 class="sub-ttl">投稿一覧</h2>
         {% for row in output %}
           <div class="post-list">
-            <span id="{{ row.id }}" class="post-number">No:{{ row.id }}</span><br>
             <span class="post-name">名前:{{ row.name }}</span>
             <span class="post-date">{{ row.post_date }}</span><br>
             <p class="post-body">{{ row.form_body }}</p><br>
-            <a href="reply.php">
-              <span class="reply">返信する</span>
-            </a>
           </div>
+          <form action="index.php" method="post">
+            <input type="hidden" name="post_id" value="{{ row.id }}">
+            <button class="reply" type="submit" name="reply_btn">返信する</button>
+          </form>
           <form action="delete.php" method="post"><input type="hidden" name="post_id" value="{{ row.id }}">
             <button class="delete-btn" type="submit" name="delete_btn">削除</button>
           </form>
@@ -56,6 +56,26 @@
             <input type="hidden" name="post_id" value="{{ row.id }}">
             <button class="edit_btn" type="submit" name="edit_btn">編集</button>
           </form>
+          {% for reply_post in reply %}
+          {% if reply_post.reply_id == row.id %}
+          <div class="reply-post">
+            <span class="post-name">名前:{{ reply_post.name }}</span>
+            <span class="post-date">{{ reply_post.post_date }}</span>
+            <p class="post-body">{{ reply_post.form_body }}</p>
+          </div>
+          <form action="index.php" method="post">
+            <input type="hidden" name="post_id" value="{{ row.id }}">
+            <button class="reply" type="submit" name="reply_btn">返信する</button>
+          </form>
+          <form action="delete.php" method="post"><input type="hidden" name="post_id" value="{{ row.id }}">
+            <button class="delete-btn" type="submit" name="delete_btn">削除</button>
+          </form>
+          <form action="edit.php" method="post">
+            <input type="hidden" name="post_id" value="{{ row.id }}">
+            <button class="edit_btn" type="submit" name="edit_btn">編集</button>
+          </form>
+          {% endif %}
+          {% endfor %} 
         {% endfor %}
       </div>
     </div>

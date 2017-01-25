@@ -25,7 +25,7 @@ if (isset($_SESSION['result'])) {
 }
 
 // 投稿一覧を出力
-$sth = $con->prepare("SELECT * FROM post ORDER BY id DESC");
+$sth = $con->prepare("SELECT * FROM post WHERE reply_id=0 ORDER BY id DESC");
 $sth->execute();
 $output = $sth->fetchAll(PDO::FETCH_ASSOC);
 
