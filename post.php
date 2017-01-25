@@ -12,9 +12,12 @@ if (isset($_POST['form_post']) === true)
   $form_body = $_POST['form_body'];
   $post_date = date('Y年m月d日 H:i');
   $password = $_POST['password'];
-}
-if (isset($_POST['parent_id']))
-{
+
+} elseif (isset($_POST['reply_post']) === true) {
+  $name = $_POST['name'];
+  $form_body = $_POST['form_body'];
+  $post_date = date('Y年m月d日 H:i');
+  $password = $_POST['password'];
   $parent_id = $_POST['parent_id'];
 }
 
@@ -25,6 +28,7 @@ $_SESSION['result'] = $validate;
 
 // 投稿をDBへ保存 
 if ($validate === true) {
+  if (isset($_POST['form_post']) === true) {
   $stm = $con->prepare("INSERT INTO post(name,form_body,post_date,password) values(:name,:form_body,:post_date,:password)");
 
   $stm->bindValue(':name', $name);
@@ -33,13 +37,18 @@ if ($validate === true) {
   $stm->bindValue(':password', $password);
 
   $result = $stm->execute();
+  } elseif (isset($_POST['reply_post']) === true)
+  {
+  $stm = $con->prepare("INSERT INTO post(reply_id,name,form_body,post_date,password) values(:reply_id,:name,:form_body,:post_date,:password)");
 
-  if (isset($parent_id)) {
-    $stm = $con->prepare("INSERT INTO post(reply_id) values (:reply_id)");
-    $stm->bindValue(':reply_id', $parent_id);
-    $result = $stm->execute();
+  $stm->bindValue(':reply_id', $parent_id);
+  $stm->bindValue(':name', $name);
+  $stm->bindValue(':form_body', $form_body);
+  $stm->bindValue(':post_date', $post_date);
+  $stm->bindValue(':password', $password);
+
+  $result = $stm->execute();
   }
 }
-
 
   header("Location: /mybbs/index.php");
