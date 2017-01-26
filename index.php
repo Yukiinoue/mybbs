@@ -13,8 +13,8 @@ $con = db_connect();
 require 'vendor/autoload.php';
 $loader = new Twig_Loader_Filesystem('templates');
 $twig = new Twig_Environment($loader, array(
-  'debug' => true,
-  ));
+    'debug' => true,
+    ));
 $twig->addExtension(new Twig_Extension_Debug());
 
 
@@ -22,8 +22,8 @@ $twig->addExtension(new Twig_Extension_Debug());
 $message = null;
 
 if (isset($_SESSION['result'])) {
-  $message = $_SESSION['result'];
-  unset($_SESSION['result']);
+    $message = $_SESSION['result'];
+    unset($_SESSION['result']);
 }
 
 // 投稿一覧を出力
@@ -38,11 +38,11 @@ $reply = $sth->fetchAll(PDO::FETCH_ASSOC);
 
 // templateの出力
 if (isset($_POST['post_id'])) {
-  $parent_id = $_POST['post_id'];
-  $template = $twig->load('reply.html');
-  echo $template->render(['parent_id' => $parent_id, 'message' => $message]);
- } else {
-  $template = $twig->load('index.html');
-  echo $template->render(['output' => $output, 'message' => $message, 'reply' => $reply]);
- }
+    $parent_id = $_POST['post_id'];
+    $template = $twig->load('reply.html');
+    echo $template->render(['parent_id' => $parent_id, 'message' => $message]);
+} else {
+    $template = $twig->load('index.html');
+    echo $template->render(['output' => $output, 'message' => $message, 'reply' => $reply]);
+}
 
