@@ -7,20 +7,15 @@ require "db.php";
 $con = db_connect();
 
 // フォームの入力内容を変数に格納
-if (isset($_POST['form_post']) === true) 
-{
-  $name = $_POST['name'];
-  $form_body = $_POST['form_body'];
-  $post_date = date('Y年m月d日 H:i');
-  $password = $_POST['password'];
+$name = $_POST['name'];
+$form_body = $_POST['form_body'];
+$post_date = date('Y年m月d日 H:i');
+$password = $_POST['password'];
 
-} elseif (isset($_POST['reply_post']) === true) {
-  $name = $_POST['name'];
-  $form_body = $_POST['form_body'];
-  $post_date = date('Y年m月d日 H:i');
-  $password = $_POST['password'];
-  $parent_id = $_POST['parent_id'];
+if (isset($_POST['parent_id'])) {
+  $parent_id = $_POST['parent_id'];  
 }
+
 
 // バリデーションメッセージの格納
 $validate = validation($name, $form_body);
