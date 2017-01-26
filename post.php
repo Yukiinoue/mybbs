@@ -2,9 +2,9 @@
 session_start();
 
 require "validation.php";
-require "dbconnect.php";
+require "db.php";
 
-$con = dbConnect();
+$con = db_connect();
 
 // フォームの入力内容を変数に格納
 if (isset($_POST['form_post']) === true) 

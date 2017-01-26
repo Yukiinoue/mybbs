@@ -6,8 +6,8 @@ error_reporting(E_ALL);
 session_start();
 
 // DB接続
-require "dbconnect.php";
-$con = dbConnect();
+require "db.php";
+$con = db_connect();
 
 // twig
 require 'vendor/autoload.php';
