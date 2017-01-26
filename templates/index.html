@@ -56,12 +56,12 @@
             <input type="hidden" name="post_id" value="{{ row.id }}">
             <button class="edit_btn" type="submit" name="edit_btn">編集</button>
           </form>
-          {% for reply_post in reply %}
-          {% if reply_post.reply_id == row.id %}
+          {% if row.children %}
+          {% for children_row in row.children %}
           <div class="reply-post">
-            <span class="post-name">名前:{{ reply_post.name }}</span>
-            <span class="post-date">{{ reply_post.post_date }}</span>
-            <p class="post-body">{{ reply_post.form_body }}</p>
+            <span class="post-name">名前:{{ children_row.name }}</span>
+            <span class="post-date">{{ children_row.post_date }}</span>
+            <p class="post-body">{{ children_row.form_body }}</p>
           </div>
           <form action="index.php" method="post">
             <input type="hidden" name="post_id" value="{{ row.id }}">
@@ -74,8 +74,9 @@
             <input type="hidden" name="post_id" value="{{ row.id }}">
             <button class="edit_btn" type="submit" name="edit_btn">編集</button>
           </form>
-          {% endif %}
           {% endfor %} 
+          {% endif %}
+        
         {% endfor %}
       </div>
     </div>

@@ -26,15 +26,25 @@ if (isset($_SESSION['result'])) {
     unset($_SESSION['result']);
 }
 
+$reply = array();
 // 投稿一覧を出力
 $sth = $con->prepare("SELECT * FROM post WHERE reply_id=0 ORDER BY id DESC");
 $sth->execute();
 $output = $sth->fetchAll(PDO::FETCH_ASSOC);
 
+
 // 返信記事の出力
-$sth = $con->prepare("SELECT * FROM post WHERE reply_id");
-$sth->execute();
-$reply = $sth->fetchAll(PDO::FETCH_ASSOC);
+foreach ($output as &$reply) {
+    $id = $reply['id'];
+
+    $sth = $con->prepare("SELECT * FROM post WHERE reply_id = :id");
+    $sth->bindValue(':id',$id);
+    $sth->execute();
+
+    $reply['children'] = $sth->fetchAll(PDO::FETCH_ASSOC);
+}
+unset($reply);
+
 
 // templateの出力
 if (isset($_POST['post_id'])) {
@@ -43,6 +53,5 @@ if (isset($_POST['post_id'])) {
     echo $template->render(['parent_id' => $parent_id, 'message' => $message]);
 } else {
     $template = $twig->load('index.html');
-    echo $template->render(['output' => $output, 'message' => $message, 'reply' => $reply]);
+    echo $template->render(['output' => $output, 'message' => $message]);
 }
-
