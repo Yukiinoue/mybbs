@@ -2,8 +2,9 @@
 session_start();
 
 require "validation.php";
+require "dbconnect.php";
 
-$con = new PDO('mysql:host=localhost;dbname=mybbs;charset=utf8','appuser','eDZNQ7ZnMuDm');
+$con = dbConnect();
 
 // フォームの入力内容を変数に格納
 if (isset($_POST['form_post']) === true) 

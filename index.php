@@ -5,6 +5,10 @@ error_reporting(E_ALL);
 
 session_start();
 
+// DB接続
+require "dbconnect.php";
+$con = dbConnect();
+
 // twig
 require 'vendor/autoload.php';
 $loader = new Twig_Loader_Filesystem('templates');
@@ -13,8 +17,6 @@ $twig = new Twig_Environment($loader, array(
   ));
 $twig->addExtension(new Twig_Extension_Debug());
 
-// DB接続
-$con = new PDO('mysql:host=localhost;dbname=mybbs;charset=utf8','appuser','eDZNQ7ZnMuDm');
 
 // バリデーションメッセージの受け取り、変数格納
 $message = null;
