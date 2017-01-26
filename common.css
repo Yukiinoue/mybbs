@@ -1,0 +1,29 @@
+@charset "utf-8";
+
+/*----- #all -----*/
+#all {
+
+  }
+
+/*----- .all-inner -----*/
+.all-inner {
+  width: 700px;
+  margin: 0 auto;
+  }
+
+/*----- .wrapper -----*/
+.wrapper {
+  width: 500px;
+  margin: 0 auto;
+  }
+
+.wf-nicomoji { font-family: "Nico Moji"; }
+
+.sub-ttl {
+  margin-bottom: 20px;
+  }
+
+.form-item {
+  display: inline-block;
+  }
+
