@@ -5,80 +5,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>井上のBBS</title>
     <link href="https://fonts.googleapis.com/earlyaccess/nicomoji.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+    <link href="reset.css" rel="stylesheet">
+    <link href="common.css" rel="stylesheet">
+
   </head>
-  <body style="margin: 0;　font-family: "Nico Moji";>
-    <div style="background-color: #ecf0f1; height: auto; margin: 0;" id="all">
-      <div class="all-inner" style="width: 60%; margin: 0 auto;">
-        <div class="wrapper" style="width: 500px; margin: 0 auto;">
-          <h1 id="form-ttl" style="margin: 0;">井上のBBS</h1>
-          <div class="form-wrap">
-            <form action="post.php" method="post" accept-charset="utf-8">
-              <h2 class="sub-ttl">投稿フォーム</h2>
-              {% if message is same as(true) %}
-                <span class="success-message">投稿を送信しました。</span>
-              {% elseif message %} 
-              {% for value in message %}
-                <span class="error-message">{{ value }}</span><br>
-              {% endfor %}
-              {% endif %}
-              <div class="text-box form-group">
-                <span class="form-item">名前</span>
-                <input class="form-text form-control" type="text" name="name"><br>
-              </div>  
-              <div class="text-box form-group">
-                <span class="form-item">本文</span><br>
-                <textarea class="form-body" name="form_body" cols="68" rows="10"></textarea><br>
-                <span class="form-item">パスワード</span><br>
-                <span style="display: inline-block;"> 
-                  <input style="display: inline-block;" class="form-password from-control" type="password" name="password"><br>
-                </span>
-                <span style="padding: 20px;" class="post-btn">
-                  <input style="padding: 10px" class="form-text" type="submit" name="form_post" value="投稿">
+  <body id="body"　class="wf-nicomoji">
+    <div id="all">
+      <div class="wrapper clearfix">
+        <h1 id="form-ttl"">いのうえのBBS</h1>
+        <div class="form-wrap">
+          <form action="post.php" method="post" accept-charset="utf-8">
+            <h2 class="sub-ttl">とうこうフォーム</h2>
+            {% if message is same as(true) %}
+              <span class="success-message">投稿を送信しました。</span>
+            {% elseif message %} 
+            {% for value in message %}
+              <span class="error-message">{{ value }}</span><br>
+            {% endfor %}
+            {% endif %}
+            <div class="text-box form-group">
+              <span class="form-item">なまえ</span>
+              <input class="form-text form-control" type="text" name="name"><br>
+            </div>  
+            <div class="text-box form-group clearfix">
+              <div class="body-wrap">
+                <span class="form-item">ほんぶん</span>
+                <textarea class="form-body" name="form_body" cols="auto" rows="10"></textarea><br>
+              </div>
+              <div class="password-wrap">
+                <span class="form-item">パスワード</span>
+                <span class=""> 
+                  <input class="form-password from-control" type="password" name="password"><br>
                 </span>
               </div>
-            </form>  
-          </div>
-          <h2 class="sub-ttl">投稿一覧</h2>
-          {% for row in output %}
-            <div class="post-list" style="border-bottom: 3px solid #3498db; padding: 20px 20px 40px 20px;margin-bottom: 40px; background: #fbfbfb;">
-              <span style="margin-bottom: 10px;"  class="post-name">名前:{{ row.name }}</span>
-              <span style="float: right; clear: both;" class="post-date">{{ row.post_date }}</span><br>
-              <p class="post-body">{{ row.form_body }}</p><br>
+              <span class="post-btn">
+                <input class="form-text btn btn-primary" type="submit" name="form_post" value="そうしん">
+              </span>
+            </div>
+          </form>  
+        </div>
+        <h2 class="sub-ttl">とうこういちらん</h2>
+        {% for row in output %}
+          <div class="post-list post-card clearfix">
+            <div class="post-header">
+              <span class="post-name">なまえ:{{ row.name }}</span>
+              <span class="post-date">{{ row.post_date }}</span><br>
+            </div>
+            <p class="post-body">{{ row.form_body }}</p><br>
+            <div class="btn-wrapper clearfix">
               <form action="index.php" method="post">
                 <input type="hidden" name="post_id" value="{{ row.id }}">
-                <button style="float:left; height: 25px;" class="reply" type="submit" name="reply_btn">返信する</button>
+                <button class="reply btn btn-primary" type="submit" name="reply_btn">へんしん</button>
               </form>
               <form action="delete.php" method="post"><input type="hidden" name="post_id" value="{{ row.id }}">
-                <button style="float: right; height: 25px; background: #c0392b; border:none; color: #fff; border-radius: 2px;" class="delete-btn" type="submit" name="delete_btn">削除</button>
+                <button class="delete-btn btn btn-danger" type="submit" name="delete_btn">さくじょ</button>
               </form>
               <form action="edit.php" method="post">
                 <input type="hidden" name="post_id" value="{{ row.id }}">
-                <button style="float: right; height: 25px; margin-right: 10px;" class="edit_btn" type="submit" name="edit_btn">編集</button>
+                <button class="edit-btn btn btn-warning" type="submit" name="edit_btn">へんしゅう</button>
               </form>
             </div>
-            {% if row.children %}
-            {% for children_row in row.children %}
-            <div class="reply-post">
-              <span class="post-name">名前:{{ children_row.name }}</span>
-              <span class="post-date">{{ children_row.post_date }}</span>
+          </div>
+          {% if row.children %}
+          {% for children_row in row.children %}
+          <div class="reply-wrap clearfix">
+            <div class="post-list reply-card reply-list clearfix">
+              <div class="post-header">
+                <span class="post-name">なまえ:{{ children_row.name }}</span>
+                <span class="post-date">{{ children_row.post_date }}</span>
+              </div>
               <p class="post-body">{{ children_row.form_body }}</p>
+              <div class="btn-wrapper clearfix">
+                <form action="index.php" method="post">
+                  <input type="hidden" name="post_id" value="{{ row.id }}">
+                  <button class="reply btn btn-primary" type="submit" name="reply_btn">へんしん</button>
+                </form>
+                <form action="delete.php" method="post"><input type="hidden" name="post_id" value="{{ row.id }}">
+                  <button class="delete-btn btn btn-danger" type="submit" name="delete_btn">さくじょ</button>
+                </form>
+                <form action="edit.php" method="post">
+                  <input type="hidden" name="post_id" value="{{ row.id }}">
+                  <button class="edit-btn btn btn-warning" type="submit" name="edit_btn">へんしゅう</button>
+                </form>
+              </div>
             </div>
-            <form action="index.php" method="post">
-              <input type="hidden" name="post_id" value="{{ row.id }}">
-              <button class="reply" type="submit" name="reply_btn">返信する</button>
-            </form>
-            <form action="delete.php" method="post"><input type="hidden" name="post_id" value="{{ row.id }}">
-              <button class="delete-btn" type="submit" name="delete_btn">削除</button>
-            </form>
-            <form action="edit.php" method="post">
-              <input type="hidden" name="post_id" value="{{ row.id }}">
-              <button class="edit_btn" type="submit" name="edit_btn">編集</button>
-            </form>
-            {% endfor %} 
-            {% endif %}
-          {% endfor %}
-        </div>
+            <div class="reply-icon">
+                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            </div>
+          </div>
+          {% endfor %} 
+          {% endif %}
+        {% endfor %}
       </div>
     </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
   </body>
 </html>
