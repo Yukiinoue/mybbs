@@ -12,22 +12,6 @@ $twig = new Twig_Environment($loader, array(
     ));
 $twig->addExtension(new Twig_Extension_Debug());
 
-
-// 返信記事の出力
-$reply = array();
-
-foreach ($output as &$reply) {
-    $id = $reply['id'];
-
-    $sth = $con->prepare("SELECT * FROM post WHERE reply_id = :id ORDER BY id ASC");
-    $sth->bindValue(':id',$id);
-    $sth->execute();
-
-    $reply['children'] = $sth->fetchAll(PDO::FETCH_ASSOC);
-}
-
-unset($reply);
-
 // templateの出力
     $parent_id = $_POST['post_id'];
     $template = $twig->load('reply.html');
