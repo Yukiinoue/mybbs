@@ -1,13 +1,8 @@
 <?php
-// エラー表示
 ini_set("display_errors", "On");
 error_reporting(E_ALL);
 
-session_start();
-
-// DB接続
-require "db.php";
-$con = db_connect();
+require 'index.php';
 
 // twig
 require 'vendor/autoload.php';
@@ -17,20 +12,6 @@ $twig = new Twig_Environment($loader, array(
     ));
 $twig->addExtension(new Twig_Extension_Debug());
 
-// バリデーションメッセージの受け取り、変数格納
-$message = null;
-
-if (isset($_SESSION['result'])) {
-    $message = $_SESSION['result'];
-    unset($_SESSION['result']);
-}
-
-// 投稿一覧を出力
-$output = null;
-
-$sth = $con->prepare("SELECT * FROM post WHERE reply_id=0 ORDER BY id DESC");
-$sth->execute();
-$output = $sth->fetchAll(PDO::FETCH_ASSOC);
 
 // 返信記事の出力
 $reply = array();
@@ -47,9 +28,7 @@ foreach ($output as &$reply) {
 
 unset($reply);
 
-
 // templateの出力
-if (empty($_POST['post_id'])) {
-    $template = $twig->load('index.html');
-    echo $template->render(['output' => $output, 'message' => $message]);
-}
+    $parent_id = $_POST['post_id'];
+    $template = $twig->load('reply.html');
+    echo $template->render(['parent_id' => $parent_id, 'message' => $message]);

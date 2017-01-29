@@ -1,11 +1,11 @@
 <?php
 
 // フォームのバリデーション
-function validation($name, $form_body) 
+function validation($name, $form_body)
 {
     $result = true;
     $error_msg = [];
-    
+
     if ($name == '') {
         $result = false;
         $error_msg[] = '名前が入力されていません。';

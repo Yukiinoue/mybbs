@@ -23,7 +23,7 @@ $validate = validation($name, $form_body);
 $_SESSION['result'] = $validate;
 
 
-// 投稿をDBへ保存 
+// 投稿をDBへ保存
 if ($validate === true) {
     if ($parent_id) {
         $stm = $con->prepare("INSERT INTO post(reply_id,name,form_body,post_date,password) values(:reply_id,:name,:form_body,:post_date,:password)");

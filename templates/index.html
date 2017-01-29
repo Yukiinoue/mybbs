@@ -20,7 +20,7 @@
             <h2 class="sub-ttl">とうこうフォーム</h2>
             {% if message is same as(true) %}
               <span class="success-message">投稿を送信しました。</span>
-            {% elseif message %} 
+            {% elseif message %}
             {% for value in message %}
               <span class="error-message">{{ value }}</span><br>
             {% endfor %}
@@ -28,7 +28,7 @@
             <div class="text-box form-group">
               <span class="form-item">なまえ</span>
               <input class="form-text form-control" type="text" name="name"><br>
-            </div>  
+            </div>
             <div class="text-box form-group clearfix">
               <div class="body-wrap">
                 <span class="form-item">ほんぶん</span>
@@ -36,7 +36,7 @@
               </div>
               <div class="password-wrap">
                 <span class="form-item">パスワード</span>
-                <span class=""> 
+                <span class="">
                   <input class="form-password from-control" type="password" name="password"><br>
                 </span>
               </div>
@@ -44,7 +44,7 @@
                 <input class="form-text btn btn-primary" type="submit" name="form_post" value="そうしん">
               </span>
             </div>
-          </form>  
+          </form>
         </div>
         <h2 class="sub-ttl">とうこういちらん</h2>
         {% for row in output %}
@@ -55,7 +55,7 @@
             </div>
             <p class="post-body">{{ row.form_body }}</p><br>
             <div class="btn-wrapper clearfix">
-              <form action="index.php" method="post">
+              <form action="reply.php" method="post">
                 <input type="hidden" name="post_id" value="{{ row.id }}">
                 <button class="reply btn btn-primary" type="submit" name="reply_btn">へんしん</button>
               </form>
@@ -78,7 +78,7 @@
               </div>
               <p class="post-body">{{ children_row.form_body }}</p>
               <div class="btn-wrapper clearfix">
-                <form action="index.php" method="post">
+                <form action="reply.php" method="post">
                   <input type="hidden" name="post_id" value="{{ row.id }}">
                   <button class="reply btn btn-primary" type="submit" name="reply_btn">へんしん</button>
                 </form>
@@ -95,7 +95,7 @@
                 <i class="fa fa-angle-double-right" aria-hidden="true"></i>
             </div>
           </div>
-          {% endfor %} 
+          {% endfor %}
           {% endif %}
         {% endfor %}
       </div>
