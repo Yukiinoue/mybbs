@@ -3,19 +3,15 @@
 ini_set("display_errors", "On");
 error_reporting(E_ALL);
 
+// セッション開始
 session_start();
 
-// DB接続
-require "db.php";
-$con = db_connect();
+// 別ファイルの呼び出し
+require "include/conf/twig.php";
+require "include/model/db.php";
 
-// twig
-require 'vendor/autoload.php';
-$loader = new Twig_Loader_Filesystem('templates');
-$twig = new Twig_Environment($loader, array(
-    'debug' => true,
-    ));
-$twig->addExtension(new Twig_Extension_Debug());
+// DB接続
+$con = db_connect();
 
 // バリデーションメッセージの受け取り、変数格納
 $message = null;
@@ -47,9 +43,6 @@ foreach ($output as &$reply) {
 
 unset($reply);
 
-
 // templateの出力
-if (empty($_POST['post_id'])) {
-    $template = $twig->load('index.html');
-    echo $template->render(['output' => $output, 'message' => $message]);
-}
+$view = 'index.html';
+twig_view ($twig, $view, $output, $message);
