@@ -31,18 +31,16 @@ $output = $sth->fetchAll(PDO::FETCH_ASSOC);
 // 返信記事の出力
 $reply = array();
 
-foreach ($output as &$reply) {
+foreach ($output as $key=>$reply) {
     $id = $reply['id'];
-
+    
     $sth = $con->prepare("SELECT * FROM post WHERE reply_id = :id ORDER BY id ASC");
     $sth->bindValue(':id',$id);
     $sth->execute();
 
-    $reply['children'] = $sth->fetchAll(PDO::FETCH_ASSOC);
+    $output[$key]['children'] = $sth->fetchAll(PDO::FETCH_ASSOC);
 }
-
-unset($reply);
 
 // templateの出力
 $view = 'index.html';
-twig_view ($twig, $view, $output, $message);
+twig_view ($view, $output, $message);
