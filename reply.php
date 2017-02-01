@@ -15,4 +15,4 @@ if (isset($_SESSION['result'])) {
 // templateの出力
 $parent_id = $_POST['post_id'];
 $view = 'reply.html';
-twig_view ($twig, $view, $parent_id, $message);
+twig_view ($view, $parent_id, $message);
