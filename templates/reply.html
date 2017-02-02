@@ -6,7 +6,7 @@
     <div class="wrapper clearfix">
       <h1 id="form-ttl">いのうえのBBS</h1>
       <div class="form-wrap">
-        <form action="/include/model/post.php" method="post" accept-charset="utf-8">
+        <form action="include/model/post.php" method="post" accept-charset="utf-8">
           <h2 class="sub-ttl">へんしんフォーム</h2>
           <div class="text-box form-group">
             <span class="form-item">なまえ</span>
@@ -21,7 +21,7 @@
               <input class="form-text" type="submit" name="reply_post" value="へんしん">
             </span>
           </div>
-          <input type="hidden" name="parent_id" value="{{ parent_id }}">
+          <input type="hidden" name="parent_id" value="{{ data }}">
         </form>
       </div>
       <a href="index.php">
