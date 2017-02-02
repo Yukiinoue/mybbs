@@ -21,26 +21,39 @@ if (isset($_SESSION['result'])) {
     unset($_SESSION['result']);
 }
 
-// 投稿一覧を出力
-$output = null;
+// 投稿記事の取得
+function get_post($con)
+{
+// 初期化
+$output = array();
 
+// 一覧データの取得
 $sth = $con->prepare("SELECT * FROM post WHERE reply_id=0 ORDER BY id DESC");
 $sth->execute();
 $output = $sth->fetchAll(PDO::FETCH_ASSOC);
 
-// 返信記事の出力
-$reply = array();
-
-foreach ($output as $key=>$reply) {
-    $id = $reply['id'];
-    
-    $sth = $con->prepare("SELECT * FROM post WHERE reply_id = :id ORDER BY id ASC");
-    $sth->bindValue(':id',$id);
-    $sth->execute();
-
-    $output[$key]['children'] = $sth->fetchAll(PDO::FETCH_ASSOC);
+return $output;
 }
 
+$output = get_post($con);
+
+// ツリー型一覧データの形成
+function get_tree($con, $parent_posts)
+{
+    foreach ($parent_posts as $key=>$post)
+    {
+        // 親記事に対する返信一覧を取得し、childrenへ挿入
+        $post[$key]['children'] = get_post($con);
+
+        // 取得したchildrenを親とした返信一覧の取得し、ループ
+        $post[$key]['children'] = get_tree($con, $post[$key]['children']);
+    }
+
+    // ツリー型一覧データの返却
+    return $post_data;
+}
+
+$post_data = get_tree($con, $output);
 // templateの出力
 $view = 'index.html';
 twig_view ($view, $output, $message);
