@@ -1,0 +1,13 @@
+<div class="btn-wrapper clearfix">
+  <form action="reply.php" method="post">
+    <input type="hidden" name="post_id" value="{{ row.id }}">
+    <button class="reply btn btn-primary" type="submit" name="reply_btn">へんしん</button>
+  </form>
+  <form action="delete.php" method="post"><input type="hidden" name="post_id" value="{{ row.id }}">
+    <button class="delete-btn btn btn-danger" type="submit" name="delete_btn">さくじょ</button>
+  </form>
+  <form action="edit.php" method="post">
+    <input type="hidden" name="post_id" value="{{ row.id }}">
+    <button class="edit-btn btn btn-warning" type="submit" name="edit_btn">へんしゅう</button>
+  </form>
+</div>
