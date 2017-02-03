@@ -43,6 +43,7 @@ $output = get_post($con);
 // ツリー型一覧データの形成
 function get_tree($con, $parent_posts)
 {
+    $post = array();
     foreach ($parent_posts as $key=>$post)
     {
         // 親記事に対する返信一覧を取得し、childrenへ挿入
