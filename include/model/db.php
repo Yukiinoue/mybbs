@@ -2,7 +2,7 @@
 // DB接続
 function db_connect ()
 {
-    $con = new PDO('mysql:host=localhost;dbname=mybbs;charset=utf8','appuser','eDZNQ7ZnMuDm');
+    $con = new PDO('mysql:host=192.168.33.10;dbname=mybbs;charset=utf8','appuser','eDZNQ7ZnMuDm');
     return $con;
 }
 
@@ -44,5 +44,18 @@ function get_tree($con, $parent_posts)
     return $post;
 }
 
-
 $reply = get_tree($con, $output);
+
+// 返信用の対象親記事の取得
+function get_parent($con, $parent_id)
+{
+  // 配列の初期化
+  $parent_post = array();
+  $sth = $con->prepare("SELECT * FROM post WHERE id = :parent_id");
+  $sth = bindValue(':parent_id', $parent_id);
+  $sth->execute();
+
+  $parent_post = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+  return $parent_post;
+}
