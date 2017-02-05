@@ -1,4 +1,5 @@
 <?php
+
 ini_set("display_errors", "On");
 error_reporting(E_ALL);
 
@@ -17,7 +18,6 @@ if (isset($_SESSION['result'])) {
 $parent_id = $_POST['post_id'];
 // 返信対象の親記事の取得
 $parent_post = get_parent($con, $parent_id);
-var_dump($parent_post);
 // templateの出力
 $view = 'reply.html';
-twig_view ($view, $parent_id, $message,$parent_post);
+twig_view ($view, $parent_post, $message);

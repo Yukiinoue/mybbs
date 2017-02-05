@@ -52,7 +52,7 @@ function get_parent($con, $parent_id)
   // 配列の初期化
   $parent_post = array();
   $sth = $con->prepare("SELECT * FROM post WHERE id = :parent_id");
-  $sth = bindValue(':parent_id', $parent_id);
+  $sth->bindValue(':parent_id', $parent_id);
   $sth->execute();
 
   $parent_post = $sth->fetchAll(PDO::FETCH_ASSOC);
