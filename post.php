@@ -2,7 +2,7 @@
 session_start();
 
 require "validation.php";
-require "db.php";
+require "include/model/db.php";
 
 $con = db_connect();
 
