@@ -1,16 +1,20 @@
 <?php
-$con = new PDO('mysql:host=localhost;dbname=mybbs;charset=utf8','appuser','eDZNQ7ZnMuDm');
+// エラー表示
+ini_set("display_errors", "On");
+error_reporting(E_ALL);
 
-// 削除機能
-if (isset($_POST['post_id'])) {
-  $id = $_POST['post_id'];
-} else {
-  echo "エラーが発生しました。";
-}
+require 'include/conf/twig.php';
+require 'include/model/db.php';
 
-  $del = $con->prepare("DELETE FROM post WHERE id=:id");
+$con = db_connect();
 
-  $del->bindValue(':id', $id);
-  $del->execute();
 
-header("Location: /mybbs/index.php"); 
+$parent_id = $_POST['post_id'];
+$message = null;
+
+// 削除対象記事の取得
+$parent_post = get_parent($con, $parent_id);
+
+// templateの出力
+$view = 'delete.html';
+twig_view ($view, $parent_post, $message);

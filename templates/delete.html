@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+{% include 'header.html' %}
+  <body id="body"　class="wf-nicomoji">
+  <div id="all">
+    <div class="wrapper clearfix">
+      <h1 id="form-ttl">いのうえのBBS</h1>
+      <div class="form-wrap">
+        <form action="post.php" method="post" accept-charset="utf-8">
+          <h2 class="sub-ttl">さくじょフォーム</h2>
+          <div class="text-box form-group">
+            <span class="form-item">パスワード</span><br>
+            <input class="form-password from-control" type="password" name="password"><br>
+            <span class="post-btn">
+              <input class="form-text" type="submit" name="delete_post" value="さくじょ">
+            </span>
+          </div>
+          <input type="hidden" name="parent_id" value="{{ data }}">
+        </form>
+      </div>
+      <a href="index.php">
+      <span class="back-button">TOPへもどる</span>
+      </a>
+      {% for row in data %}
+        {% include 'object_post.html' %}
+      {% endfor %}
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
