@@ -24,7 +24,9 @@
           <input type="hidden" name="parent_id" value="{{ data }}">
         </form>
       </div>
-
+      {% for row in data %}
+        {% include 'object_post.html' %}
+      {% endfor %}
       <a href="index.php">
       <span class="back-button">TOPへもどる</span>
       </a>
