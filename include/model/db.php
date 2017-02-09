@@ -24,8 +24,6 @@ $output = $sth->fetchAll(PDO::FETCH_ASSOC);
 return $output;
 }
 
-$output = get_post($con);
-
 // ツリー型一覧データの形成
 function get_tree($con, $parent_posts)
 {
@@ -58,4 +56,16 @@ function get_parent($con, $parent_id)
   $parent_post = $sth->fetchAll(PDO::FETCH_ASSOC);
 
   return $parent_post;
+}
+
+//　削除処理
+function delete_post ($con, $parent_id)
+{
+
+  $sth = $con->prepare("DELETE FROM post WHERE id=:id");
+
+  $sth->bindValue(':id', $id);
+  $sth->execute();
+
+
 }
