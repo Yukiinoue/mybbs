@@ -18,6 +18,9 @@ if (isset($_SESSION['result'])) {
     unset($_SESSION['result']);
 }
 
+// 投稿記事の取得
+$output = get_post($con);
+
 // templateの出力
 $view = 'index.html';
 twig_view ($view, $output, $message);
