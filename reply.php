@@ -1,4 +1,5 @@
 <?php
+
 ini_set("display_errors", "On");
 error_reporting(E_ALL);
 
@@ -18,6 +19,7 @@ $parent_id = $_POST['post_id'];
 
 // 返信対象の親記事の取得
 $parent_post = get_parent($con, $parent_id);
+
 var_dump($parent_post);
 
 // templateの出力

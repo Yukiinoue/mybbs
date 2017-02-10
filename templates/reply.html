@@ -21,7 +21,8 @@
               <input class="form-text" type="submit" name="reply_post" value="へんしん">
             </span>
           </div>
-          <input type="hidden" name="parent_id" value="{{ data }}">
+          <input type="hidden" name="parent_id" value="{{ data['id'] }}">
+          {{ dump(data[0]['id']) }}
         </form>
       </div>
       {% for row in data %}
