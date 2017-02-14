@@ -23,8 +23,11 @@ if (isset($_SESSION['result'])) {
 $con = db_connect();
 
 // 投稿記事の取得
-$output = get_post($con);
+$posts = get_post($con);
+
+// 返信記事ツリーデータの取得
+$tree = get_tree($con,$posts);
 
 // templateの出力
 $view = 'index.html';
-twig_view ($view, $output, $message);
+twig_view ($view, $posts, $message);
