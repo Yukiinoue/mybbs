@@ -17,7 +17,7 @@ function get_post($con, $reply_id = 0)
     $sth->bindValue(':reply_id', $reply_id);
     $sth->execute();
     $output = $sth->fetchAll(PDO::FETCH_ASSOC);
-
+    // 子記事を取得する記述がない
     return $output;
 }
 
@@ -27,7 +27,6 @@ function get_tree($con, $parent_posts)
     $post = array();
     foreach ($parent_posts as $key=>$post)
     {
-
         // 親記事に対する返信一覧を取得
         $posts = get_post($con, $post['id']);
 
@@ -38,8 +37,6 @@ function get_tree($con, $parent_posts)
     // ツリー型一覧データの返却
     return $post;
 }
-
-$reply = get_tree($con, $output);
 
 // 返信用の対象親記事の取得
 function get_parent($con, $parent_id)
