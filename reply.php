@@ -17,13 +17,11 @@ if (isset($_SESSION['result'])) {
 // 返信対象の親記事のid取得
 $parent_id = $_POST['post_id'];
 
-// 返信ツリーデータの取得
-$reply_posts = get_tree($con, $output);
+// DB接続
+$con = db_connect();
 
 // 返信対象の親記事の取得
 $parent_post = get_parent($con, $parent_id);
-
-var_dump($parent_post);
 
 // templateの出力
 $view = 'reply.html';
