@@ -25,10 +25,10 @@ function get_post($con, $reply_id = 0)
 function get_tree($con, $parent_posts)
 {
     $tree = array();
-    foreach ($parent_posts as $key=>$posts)
+    foreach ($parent_posts as $key=>$post)
     {
         // 親記事に対する返信一覧を取得
-        $tree = get_post($con, $posts['id']);
+        $tree = get_post($con, $post['id']);
 
         // 取得したchildrenを親とした返信一覧の取得し、ループ
         $tree[$key]['children'] = get_tree($con, $tree);

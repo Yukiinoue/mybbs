@@ -7,8 +7,8 @@ error_reporting(E_ALL);
 session_start();
 
 // 別ファイルの呼び出し
-require "include/conf/twig.php";
 require 'vendor/autoload.php';
+require "include/conf/twig.php";
 require "include/model/db.php";
 
 
@@ -27,7 +27,7 @@ $con = db_connect();
 $posts = get_post($con);
 
 // 返信記事ツリーデータの取得
-$tree = get_tree($con,$posts);
+$tree = get_tree($con, $posts);
 
 // $treeと$messageを$dataにまとめる
 $data = array();
@@ -35,7 +35,6 @@ $data = array();
 $data['tree'] = $tree;
 $data['message'] = $message;
 
-var_dump($data);
 // templateの出力
 $view = 'index.html';
 twig_view ($view, $data);
