@@ -10,32 +10,32 @@ function db_connect ()
 function get_post($con, $reply_id = 0)
 {
     // 初期化
-    $output = array();
+    $posts = array();
 
     // 一覧データの取得
     $sth = $con->prepare("SELECT * FROM post WHERE reply_id = :reply_id ORDER BY id DESC");
     $sth->bindValue(':reply_id', $reply_id);
     $sth->execute();
-    $output = $sth->fetchAll(PDO::FETCH_ASSOC);
+    $posts = $sth->fetchAll(PDO::FETCH_ASSOC);
     // 子記事を取得する記述がない
-    return $output;
+    return $posts;
 }
 
 // ツリー型一覧データの形成
 function get_tree($con, $parent_posts)
 {
-    $post = array();
-    foreach ($parent_posts as $key=>$post)
+    $tree = array();
+    foreach ($parent_posts as $key=>$posts)
     {
         // 親記事に対する返信一覧を取得
-        $posts = get_post($con, $post['id']);
+        $tree = get_post($con, $posts['id']);
 
         // 取得したchildrenを親とした返信一覧の取得し、ループ
-        $post[$key]['children'] = get_tree($con, $posts);
+        $tree[$key]['children'] = get_tree($con, $tree);
     }
 
     // ツリー型一覧データの返却
-    return $post;
+    return $tree;
 }
 
 // 返信用の対象親記事の取得
