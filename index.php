@@ -38,4 +38,4 @@ $data['message'] = $message;
 var_dump($data);
 // templateの出力
 $view = 'index.html';
-twig_view ($view, $posts);
+twig_view ($view, $data);
