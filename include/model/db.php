@@ -9,16 +9,16 @@ function db_connect ()
 // 投稿記事の取得
 function get_post($con, $reply_id = 0)
 {
-// 初期化
-$output = array();
+    // 初期化
+    $output = array();
 
-// 一覧データの取得
-$sth = $con->prepare("SELECT * FROM post WHERE reply_id = :reply_id ORDER BY id DESC");
-$sth->bindValue(':reply_id', $reply_id);
-$sth->execute();
-$output = $sth->fetchAll(PDO::FETCH_ASSOC);
+    // 一覧データの取得
+    $sth = $con->prepare("SELECT * FROM post WHERE reply_id = :reply_id ORDER BY id DESC");
+    $sth->bindValue(':reply_id', $reply_id);
+    $sth->execute();
+    $output = $sth->fetchAll(PDO::FETCH_ASSOC);
 
-return $output;
+    return $output;
 }
 
 // ツリー型一覧データの形成
