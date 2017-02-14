@@ -6,9 +6,6 @@ function db_connect ()
     return $con;
 }
 
-// DB接続
-$con = db_connect();
-
 // 投稿記事の取得
 function get_post($con, $reply_id = 0)
 {
@@ -47,25 +44,25 @@ $reply = get_tree($con, $output);
 // 返信用の対象親記事の取得
 function get_parent($con, $parent_id)
 {
-  // 配列の初期化
-  $parent_post = array();
-  $sth = $con->prepare("SELECT * FROM post WHERE id = :parent_id");
-  $sth->bindValue(':parent_id', $parent_id);
-  $sth->execute();
+    // 配列の初期化
+    $parent_post = array();
+    $sth = $con->prepare("SELECT * FROM post WHERE id = :parent_id");
+    $sth->bindValue(':parent_id', $parent_id);
+    $sth->execute();
 
-  $parent_post = $sth->fetchAll(PDO::FETCH_ASSOC);
+    $parent_post = $sth->fetchAll(PDO::FETCH_ASSOC);
 
-  return $parent_post;
+    return $parent_post;
 }
 
 //　削除処理
 function delete_post ($con, $parent_id)
 {
 
-  $sth = $con->prepare("DELETE FROM post WHERE id=:id");
+    $sth = $con->prepare("DELETE FROM post WHERE id=:id");
 
-  $sth->bindValue(':id', $id);
-  $sth->execute();
+    $sth->bindValue(':id', $id);
+    $sth->execute();
 
 
 }

@@ -19,6 +19,9 @@ if (isset($_SESSION['result'])) {
     unset($_SESSION['result']);
 }
 
+// DB接続
+$con = db_connect();
+
 // 投稿記事の取得
 $output = get_post($con);
 
