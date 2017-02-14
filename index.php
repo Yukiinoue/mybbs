@@ -29,6 +29,13 @@ $posts = get_post($con);
 // 返信記事ツリーデータの取得
 $tree = get_tree($con,$posts);
 
+// $treeと$messageを$dataにまとめる
+$data = array();
+
+$data['tree'] = $tree;
+$data['message'] = $message;
+
+var_dump($data);
 // templateの出力
 $view = 'index.html';
-twig_view ($view, $posts, $message);
+twig_view ($view, $posts);
