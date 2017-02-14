@@ -1,5 +1,4 @@
 <?php
-
 // エラー表示
 ini_set("display_errors", "On");
 error_reporting(E_ALL);
@@ -9,7 +8,9 @@ session_start();
 
 // 別ファイルの呼び出し
 require "include/conf/twig.php";
+require 'vendor/autoload.php';
 require "include/model/db.php";
+
 
 // バリデーションメッセージの受け取り、変数格納
 $message = null;

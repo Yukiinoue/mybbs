@@ -1,8 +1,4 @@
 <?php
-
-// twig
-require 'vendor/autoload.php';
-
 // テンプレートの呼び出し
 function twig_view ($file, $data, $message)
 {
