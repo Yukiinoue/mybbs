@@ -3,6 +3,8 @@
 ini_set("display_errors", "On");
 error_reporting(E_ALL);
 
+// 別ファイルの呼び出し
+require 'vendor/autoload.php';
 require 'include/conf/twig.php';
 require 'include/model/db.php';
 
@@ -21,8 +23,9 @@ $parent_id = $_POST['post_id'];
 $con = db_connect();
 
 // 返信対象の親記事の取得
-$parent_post = get_parent($con, $parent_id);
+$data = get_parent($con, $parent_id);
+
 
 // templateの出力
 $view = 'reply.html';
-twig_view($view,$parent_post,$message);
+twig_view($view,$data);
