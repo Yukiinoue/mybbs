@@ -21,7 +21,7 @@
       <a href="index.php">
       <span class="back-button">TOPへもどる</span>
       </a>
-      {% for row in data %}
+      {% for row in data.parent_post %}
         {% include 'object_post.html' %}
       {% endfor %}
     </div>
