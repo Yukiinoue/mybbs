@@ -27,8 +27,10 @@ function get_tree($con, $parent_posts)
     $tree = array();
     foreach ($parent_posts as $key=>$post)
     {
+
         // 親記事に対する返信一覧を取得
         $posts = get_post($con, $post['id']);
+        $tree[$key] = $post;
 
         // 取得したchildrenを親とした返信一覧の取得し、ループ
         $tree[$key]['children'] = get_tree($con, $posts);
