@@ -20,8 +20,6 @@ if (isset($_SESSION['result'])) {
 // 返信対象の親記事のid取得
 $error_msg = array();
 
-
-var_dump($_SESSION['post_id']);
 if (isset($_POST['post_id'])) {
     $parent_id = $_POST['post_id'];
 } elseif(isset($_SESSION['post_id'])){
