@@ -13,11 +13,6 @@ $form_body = $_POST['form_body'];
 $post_date = date('Y年m月d日 H:i');
 $password = $_POST['password'];
 
-if (isset($_POST['parent_id'])) {
-    $parent_id = $_POST['parent_id'];
-}
-
-
 // バリデーションメッセージの格納
 $validate = validation($name, $form_body);
 $_SESSION['result'] = $validate;
@@ -25,7 +20,8 @@ $_SESSION['result'] = $validate;
 
 // 投稿をDBへ保存
 if ($validate === true) {
-    if ($parent_id) {
+    if (isset($_POST['post_id'])) {
+        $parent_id = $_POST['post_id'];
         $stm = $con->prepare("INSERT INTO post(reply_id,name,form_body,post_date,password) values(:reply_id,:name,:form_body,:post_date,:password)");
         $stm->bindValue(':reply_id', $parent_id);
     } else {
@@ -40,4 +36,9 @@ if ($validate === true) {
     $result = $stm->execute();
 }
 
-header("Location: /mybbs/index.php");
+if (isset($parent_id)) {
+    header("Location: /mybbs/index.php");
+} elseif(isset($_POST['post_id'])) {
+    $_SESSION['post_id'] = $_POST['post_id'];
+    header("Location: /mybbs/reply.php");
+}
