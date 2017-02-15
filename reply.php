@@ -3,6 +3,7 @@
 ini_set("display_errors", "On");
 error_reporting(E_ALL);
 
+session_start();
 // 別ファイルの呼び出し
 require 'vendor/autoload.php';
 require 'include/conf/twig.php';
@@ -17,7 +18,14 @@ if (isset($_SESSION['result'])) {
 }
 
 // 返信対象の親記事のid取得
-$parent_id = $_POST['post_id'];
+if (isset($_POST['post_id'])) {
+  $parent_id = $_POST['post_id'];
+} else {
+  $error_msg[] = '不正なidです。';
+  $_SESSION['result'] = $error_msg;
+  header("Location: /mybbs/index.php");
+}
+
 
 // DB接続
 $con = db_connect();
