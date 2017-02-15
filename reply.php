@@ -17,12 +17,15 @@ if (isset($_SESSION['result'])) {
     unset($_SESSION['result']);
 }
 
-
 // 返信対象の親記事のid取得
 $error_msg = array();
 
+
+var_dump($_SESSION['post_id']);
 if (isset($_POST['post_id'])) {
     $parent_id = $_POST['post_id'];
+} elseif(isset($_SESSION['post_id'])){
+    $parent_id = $_SESSION['post_id'];
 } else {
     $error_msg[] = '不正なidです。';
     $_SESSION['result'] = $error_msg;
