@@ -41,7 +41,7 @@ function get_tree($con, $parent_posts)
     return $tree;
 }
 
-// 返信用の対象親記事の取得
+// 返信用の対象親記事の取得（単一記事）
 function get_parent($con, $parent_id)
 {
     // 配列の初期化
@@ -50,7 +50,7 @@ function get_parent($con, $parent_id)
     $sth->bindValue(':parent_id', $parent_id);
     $sth->execute();
 
-    $parent_post = $sth->fetchAll(PDO::FETCH_ASSOC);
+    $parent_post = $sth->fetch(PDO::FETCH_ASSOC);
 
     return $parent_post;
 }
