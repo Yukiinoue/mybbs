@@ -8,6 +8,7 @@
       <div class="form-wrap">
         <form action="post.php" method="post" accept-charset="utf-8">
           <h2 class="sub-ttl">へんしんフォーム</h2>
+          {% include 'form.html' %}
           <div class="text-box form-group">
             <span class="form-item">なまえ</span>
             <input class="form-text form-control" type="text" name="name"><br>
@@ -21,7 +22,7 @@
               <input class="form-text" type="submit" name="reply_post" value="へんしん">
             </span>
           </div>
-          <input type="hidden" name="parent_id" value="{{ data.parent_post[0]['id'] }}">
+          <input type="hidden" name="post_id" value="{{ data.parent_post[0]['id'] }}">
         </form>
         {{ data.parent_post[0]['id'] }}
       </div>
