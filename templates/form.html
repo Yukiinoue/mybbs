@@ -1,7 +1,7 @@
-{% if message is same as(true) %}
+{% if data.message is same as(true) %}
 	<span class="success-message">投稿を送信しました。</span>
-{% elseif message %}
-{% for value in message %}
+{% elseif data.message %}
+{% for value in data.message %}
 	<span class="error-message">{{ value }}</span><br>
 {% endfor %}
 {% endif %}
