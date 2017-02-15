@@ -22,9 +22,11 @@ $parent_id = $_POST['post_id'];
 // DB接続
 $con = db_connect();
 
-// 返信対象の親記事の取得
-$data = get_parent($con, $parent_id);
+// 返信対象の親記事とバリデーションメッセージの格納
+$data = array();
 
+$data['parent_post'] = get_parent($con, $parent_id);
+$data['message'] = $message;
 
 // templateの出力
 $view = 'reply.html';
