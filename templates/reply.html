@@ -25,7 +25,7 @@
           {{ dump(data[0]['id']) }}
         </form>
       </div>
-      {% for row in data %}
+      {% for row in data.parent_post %}
         {% include 'object_post.html' %}
       {% endfor %}
       <a href="index.php">
