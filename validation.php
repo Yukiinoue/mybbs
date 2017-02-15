@@ -1,5 +1,4 @@
 <?php
-
 // フォームのバリデーション
 function validation($name, $form_body)
 {
