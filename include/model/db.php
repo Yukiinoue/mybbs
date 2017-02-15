@@ -30,6 +30,7 @@ function get_tree($con, $parent_posts)
 
         // 親記事に対する返信一覧を取得
         $posts = get_post($con, $post['id']);
+        // 親記事自体を格納
         $tree[$key] = $post;
 
         // 取得したchildrenを親とした返信一覧の取得し、ループ
