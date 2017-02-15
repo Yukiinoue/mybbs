@@ -28,7 +28,6 @@ $posts = get_post($con);
 
 // 返信記事ツリーデータの取得
 $tree = get_tree($con, $posts);
-
 // $treeと$messageを$dataにまとめる
 $data = array();
 
