@@ -6,7 +6,7 @@ function db_connect ()
     return $con;
 }
 
-// 投稿記事の取得
+// 投稿記事一覧の取得
 function get_post($con, $reply_id = 0)
 {
     // 初期化
@@ -17,7 +17,7 @@ function get_post($con, $reply_id = 0)
     $sth->bindValue(':reply_id', $reply_id);
     $sth->execute();
     $posts = $sth->fetchAll(PDO::FETCH_ASSOC);
-    // 子記事を取得する記述がない
+
     return $posts;
 }
 
