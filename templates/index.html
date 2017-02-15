@@ -31,7 +31,6 @@
           </form>
         </div>
         <h2 class="sub-ttl">とうこういちらん</h2>
-        {{ dump(data.tree )}}
         {% for row in data.tree %}
           {% include 'parent_post.html' %}
           {% include 'child_post.html'%}
