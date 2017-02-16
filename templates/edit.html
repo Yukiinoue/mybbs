@@ -8,14 +8,14 @@
       <div class="form-wrap">
         <form action="post.php" method="post" accept-charset="utf-8">
           <h2 class="sub-ttl">へんしゅうフォーム</h2>
-          {% include 'form.html' %}
+          {% include 'form_message.html' %}
           <div class="text-box form-group">
             <span class="form-item">ほんぶん</span><br>
             <textarea class="form-body" name="form_body" cols="auto" rows="10"></textarea><br>
             <span class="form-item">記事パスワード</span><br>
             <input class="form-password from-control" type="password" name="password"><br>
             <span class="post-btn">
-              <input class="form-text" type="submit" name="reply_post" value="へんしゅう">
+              <input class="form-text" type="submit" name="edit_post" value="へんしゅう">
             </span>
           </div>
           <input type="hidden" name="post_id" value="{{ data.parent_post.id }}">
