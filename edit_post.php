@@ -33,7 +33,7 @@ if ($validate === true) {
         $parent_password = $sth->fetch(PDO::FETCH_ASSOC);
         $parent_password = $parent_password['password'];
 
-     }
+    }
 }
 
 // パスワードが一致しているかどうかの判定
@@ -51,6 +51,7 @@ if ($password == $parent_password) {
     // エラーメッセージの表示
     $error_msg[] = 'パスワードが間違っています。';
     $_SESSION['result'] = $error_msg;
+    $_SESSION['post_id'] = $parent_id;
     header("Location: /mybbs/edit.php");
     exit();
 }
