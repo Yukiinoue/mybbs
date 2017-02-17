@@ -3,6 +3,10 @@ ini_set("display_errors", "On");
 error_reporting(E_ALL);
 
 session_start();
+
+// DB接続
+$con = db_connect();
+
 // 別ファイルの呼び出し
 require 'vendor/autoload.php';
 require 'include/conf/twig.php';
@@ -29,9 +33,6 @@ if (isset($_POST['post_id'])) {
     header("Location: /mybbs/index.php");
     exit();
 }
-
-// DB接続
-$con = db_connect();
 
 // 編集対象の親記事とバリデーションメッセージの格納
 $data = array();
