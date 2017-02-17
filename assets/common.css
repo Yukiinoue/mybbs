@@ -117,12 +117,8 @@
 /* .reply-wrap */
 .reply-wrap {
   width: 100%;
-  height: 100%;
   }
-  /* .reply-card */
-  .reply-card {
-    border-bottom: 2px solid #f39c12;
-    }
+
   /* .reply-list */
   .reply-list {
     padding-left: 40px;
@@ -135,7 +131,10 @@
       float: right;
       width: 5%;
       }
-
+    /* .post-inner */
+    .post-inner {
+      border-bottom: 2px solid #f39c12;
+      }
 /*-----------------------------------------
                 返信フォーム
 -------------------------------------------*/
