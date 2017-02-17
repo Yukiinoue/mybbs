@@ -4,13 +4,14 @@ error_reporting(E_ALL);
 
 session_start();
 
-// DB接続
-$con = db_connect();
 
 // 別ファイルの呼び出し
 require 'vendor/autoload.php';
 require 'include/conf/twig.php';
 require 'include/model/db.php';
+
+// DB接続
+$con = db_connect();
 
 // バリデーションメッセージの受け取り、変数格納
 $message = null;
@@ -33,6 +34,7 @@ if (isset($_POST['post_id'])) {
     header("Location: /mybbs/index.php");
     exit();
 }
+
 
 // 編集対象の親記事とバリデーションメッセージの格納
 $data = array();
