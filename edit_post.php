@@ -5,6 +5,8 @@ error_reporting(E_ALL);
 
 session_start();
 
+// 別ファイルの呼び出し
+require 'vendor/autoload.php';
 require "validation.php";
 require "include/model/db.php";
 
@@ -34,6 +36,9 @@ if ($validate === true) {
         $parent_password = $parent_password['password'];
 
     }
+} else {
+    header("Location: /mybbs/edit.php");
+    exit();
 }
 
 // パスワードが一致しているかどうかの判定
