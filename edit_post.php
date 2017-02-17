@@ -23,6 +23,7 @@ $password = $_POST['password'];
 $validate = edit_validation($form_body, $password);
 $_SESSION['result'] = $validate;
 
+
 // 編集対象記事のパスワードを取得
 if ($validate === true) {
     if (isset($_POST['post_id'])) {
@@ -36,6 +37,10 @@ if ($validate === true) {
         $parent_password = $parent_password['password'];
 
     }
+} elseif(empty($_POST['post_id'])) {
+    $error_msg[] = '不正なidです。';
+    $_SESSION['result'] = $error_msg;
+    header("Location: /mybbs/index.php");
 } else {
     header("Location: /mybbs/edit.php");
     exit();

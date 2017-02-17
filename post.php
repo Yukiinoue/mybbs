@@ -41,4 +41,8 @@ if (isset($parent_id)) {
 } elseif(isset($_POST['post_id'])) {
     $_SESSION['post_id'] = $_POST['post_id'];
     header("Location: /mybbs/reply.php");
+} elseif(empty($_POST['post'])) {
+    $error_msg[] = '不正なidです。';
+    $_SESSION['result'] = $error_msg;
+    header("Location: /mybbs/index.php");
 }
