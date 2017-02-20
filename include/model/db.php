@@ -58,11 +58,8 @@ function get_parent($con, $parent_id)
 //　削除処理
 function delete_post ($con, $parent_id)
 {
-
     $sth = $con->prepare("DELETE FROM post WHERE id=:id");
 
     $sth->bindValue(':id', $id);
     $sth->execute();
-
-
 }
