@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ja">
-{% include 'header.html' %}
+{% include 'head.html' %}
   <body id="body"　class="wf-nicomoji">
   <div id="all">
     <div class="wrapper clearfix">
-      <h1 id="form-ttl">いのうえのBBS</h1>
+      {% include 'header.html' %}
       <div class="form-wrap">
         <form action="edit_post.php" method="post" accept-charset="utf-8">
           <h2 class="sub-ttl">へんしゅうフォーム</h2>
