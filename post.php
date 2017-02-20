@@ -1,9 +1,11 @@
 <?php
 session_start();
 
+// 依存ライブラリのロード
 require "validation.php";
 require "include/model/db.php";
 
+// DB接続
 $con = db_connect();
 
 // post_idのチェック
