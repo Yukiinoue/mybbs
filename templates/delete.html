@@ -6,7 +6,7 @@
     <div class="wrapper clearfix">
       <h1 id="form-ttl">いのうえのBBS</h1>
       <div class="form-wrap">
-        <form action="post.php" method="post" accept-charset="utf-8">
+        <form action="delete_post.php" method="post" accept-charset="utf-8">
           <h2 class="sub-ttl">さくじょフォーム</h2>
           <div class="text-box form-group">
             <span class="form-item">パスワード</span><br>
@@ -15,15 +15,14 @@
               <input class="form-text" type="submit" name="delete_post" value="さくじょ">
             </span>
           </div>
-          <input type="hidden" name="parent_id" value="{{ data }}">
+          {{dump(data.parent_post.id)}}
+          <input type="hidden" name="post_id" value="{{ data.parent_post.id }}">
         </form>
       </div>
+      {% include 'object_post.html' %}
       <a href="index.php">
       <span class="back-button">TOPへもどる</span>
       </a>
-      {% for row in data.parent_post %}
-        {% include 'object_post.html' %}
-      {% endfor %}
     </div>
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
