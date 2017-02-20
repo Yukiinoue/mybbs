@@ -3,6 +3,7 @@
 ini_set("display_errors", "On");
 error_reporting(E_ALL);
 
+session_start();
 // 別ファイルの呼び出し
 require 'vendor/autoload.php';
 require 'include/conf/twig.php';
@@ -47,6 +48,7 @@ if (empty($data['parent_post'])) {
 // 削除対象記事の取得
 $data = array();
 $data['parent_post'] = get_parent($con, $parent_id);
+$data['message'] = $message;
 
 // templateの出力
 $view = 'delete.html';
