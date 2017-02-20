@@ -45,3 +45,21 @@ function edit_validation($form_body, $password)
         return $error_msg;
     }
 }
+
+// 削除フォームのバリデーション
+function delete_validation($password)
+{
+    $result = true;
+    $error_msg = [];
+
+    if($password == '') {
+        $result = false;
+        $error_msg[] = 'パスワードが入力されていません。';
+    }
+
+    if($result == true) {
+        return $result;
+    } elseif ($result == false) {
+        return $error_msg;
+    }
+}
