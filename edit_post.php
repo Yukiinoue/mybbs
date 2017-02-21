@@ -24,6 +24,17 @@ $post = get_parent($con, $parent_id);
 if (! $post) {
     die('記事がありません。');
 }
+// 本文の有無をチェック
+$parent_id = isset($_POST['form_body']) ? $_POST['form_body'] : null;
+if (! $_POST['form_body']) {
+    die('form_bodyがありません。');
+}
+// パスワードの有無をチェック
+$parent_id = isset($_POST['password']) ? $_POST['password'] : null;
+if (! $_POST['password']) {
+    die('passwordがありません。');
+}
+
 
 // フォームの入力内容を変数に格納
 $form_body = $_POST['form_body'];
