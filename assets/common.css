@@ -44,12 +44,17 @@
   /* .form-body */
   .form-body {
     width: 100%;
+    border: 1px solid darkgray;
+    border-radius: 5px;
     }
   /* .form-item */
   .form-item {
     display: block;
     margin-bottom: 10px;
     font-size: 20px;
+    }
+  .form-password {
+    height: 30px;
     }
 /* .password-wrap */
 .password-wrap {
