@@ -25,21 +25,10 @@ if (! $post) {
     die('記事がありません。');
 }
 // 本文の有無をチェック
-$parent_id = isset($_POST['form_body']) ? $_POST['form_body'] : null;
-if (! $_POST['form_body']) {
-    die('form_bodyがありません。');
-}
+$form_body = isset($_POST['form_body']) ? $_POST['form_body'] : null;
 // パスワードの有無をチェック
-$parent_id = isset($_POST['password']) ? $_POST['password'] : null;
-if (! $_POST['password']) {
-    die('passwordがありません。');
-}
-
-
-// フォームの入力内容を変数に格納
-$form_body = $_POST['form_body'];
+$password = isset($_POST['password']) ? $_POST['password'] : null;
 $post_date = date('Y年m月d日 H:i');
-$password = $_POST['password'];
 
 // バリデーションメッセージの格納
 $validate = edit_validation($form_body, $password);
