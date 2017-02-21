@@ -13,16 +13,14 @@ require "include/model/db.php";
 // DB接続
 $con = db_connect();
 
-// リクエスト値の有無
-
 // post_idのチェック
 $parent_id = isset($_POST['post_id']) ? $_POST['post_id'] : null;
 if (! $_POST['post_id']) {
     die('post_idがありません。');
 }
 
+// 記事の有無をチェック
 $post = get_parent($con, $parent_id);
-
 if (! $post) {
     die('記事がありません。');
 }
