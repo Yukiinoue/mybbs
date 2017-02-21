@@ -34,35 +34,15 @@ $post_date = date('Y年m月d日 H:i');
 $validate = edit_validation($form_body, $password);
 $_SESSION['result'] = $validate;
 
-// 編集対象記事のパスワードを取得
-if ($validate === true) {
-    $parent_password = array();
-    $sth = $con->prepare("SELECT password FROM post WHERE id = :id");
-    $sth->bindValue('id', $parent_id);
-
-    $sth->execute();
-
-    $parent_password = $sth->fetch(PDO::FETCH_ASSOC);
-    $parent_password = $parent_password['password'];
-
-} else {
-    // バリデーションが通らなかった時の画面の遷移
-    header("Location: /mybbs/edit.php");
-    exit();
+// バリデーションが通らなかった時の画面の遷移
+if($validate !== true) {
+  $_SESSION['post_id'] = $parent_id;
+  header("Location: /mybbs/edit.php");
+  exit();
 }
 
 // 更新処理
-if ($password == $parent_password) {
-    // 記事本文の更新
-    $stm = $con->prepare("UPDATE post SET form_body=:form_body WHERE id = :id");
-    $stm->bindValue(':form_body', $form_body);
-    $stm->bindValue(':id', $parent_id);
-
-    $stm->execute();
-
-    header("Location: /mybbs/index.php");
-    exit();
-} else {
+if ($password !== $post['password']) {
     // エラーメッセージの表示
     $error_msg[] = 'パスワードが間違っています。';
     $_SESSION['result'] = $error_msg;
@@ -70,3 +50,13 @@ if ($password == $parent_password) {
     header("Location: /mybbs/edit.php");
     exit();
 }
+
+// 記事本文の更新
+$stm = $con->prepare("UPDATE post SET form_body=:form_body WHERE id = :id");
+$stm->bindValue(':form_body', $form_body);
+$stm->bindValue(':id', $parent_id);
+
+$stm->execute();
+
+header("Location: /mybbs/index.php");
+exit();
