@@ -36,9 +36,9 @@ $_SESSION['result'] = $validate;
 
 // バリデーションが通らなかった時の画面の遷移
 if($validate !== true) {
-  $_SESSION['post_id'] = $parent_id;
-  header("Location: /mybbs/edit.php");
-  exit();
+    $_SESSION['post_id'] = $parent_id;
+    header("Location: /mybbs/edit.php");
+    exit();
 }
 
 // 更新処理
