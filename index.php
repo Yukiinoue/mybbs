@@ -6,8 +6,6 @@ error_reporting(E_ALL);
 // セッション開始
 session_start();
 
-var_dump($_SESSION['post_id']);
-
 // 別ファイルの呼び出し
 require 'vendor/autoload.php';
 require "include/conf/twig.php";
