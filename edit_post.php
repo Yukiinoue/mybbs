@@ -15,7 +15,7 @@ $con = db_connect();
 
 // post_idのチェック
 $parent_id = isset($_POST['post_id']) ? $_POST['post_id'] : null;
-if (! $_POST['post_id']) {
+if (! $parent_id) {
     die('post_idがありません。');
 }
 
