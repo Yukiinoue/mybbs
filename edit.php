@@ -26,15 +26,15 @@ $error_msg = array();
 
 if (isset($_POST['post_id'])) {
     $parent_id = $_POST['post_id'];
-} elseif(isset($_SESSION['post_id'])){
-    $parent_id = $_SESSION['post_id'];
-} elseif(empty($_POST['post_id'])) {
+} elseif(isset($_GET['post_id'])){
+    $parent_id = $_GET['post_id'];
+} elseif(empty($_GET['post_id'])) {
     $error_msg[] = '不正なidです。';
     $_SESSION['result'] = $error_msg;
     header("Location: /mybbs/index.php");
     exit();
 }
-  
+
 // 編集対象の親記事とバリデーションメッセージの格納
 $data = array();
 
