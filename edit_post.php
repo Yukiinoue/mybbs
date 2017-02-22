@@ -36,8 +36,7 @@ $_SESSION['result'] = $validate;
 
 // バリデーションが通らなかった時の画面の遷移
 if($validate !== true) {
-    $_SESSION['post_id'] = $parent_id;
-    header("Location: /mybbs/edit.php");
+    header("Location: /mybbs/edit.php?post_id=$parent_id");
     exit();
 }
 
@@ -46,8 +45,7 @@ if ($password !== $post['password']) {
     // エラーメッセージの表示
     $error_msg[] = 'パスワードが間違っています。';
     $_SESSION['result'] = $error_msg;
-    $_SESSION['post_id'] = $parent_id;
-    header("Location: /mybbs/edit.php");
+    header("Location: /mybbs/edit.php?post_id=$parent_id");
     exit();
 }
 
@@ -58,5 +56,5 @@ $stm->bindValue(':id', $parent_id);
 
 $stm->execute();
 
-header("Location: /mybbs/index.php");
+header("Location: /mybbs/index.php?post_id=$parent_id");
 exit();
