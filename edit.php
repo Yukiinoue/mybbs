@@ -1,9 +1,9 @@
 <?php
+// エラー表示
 ini_set("display_errors", "On");
 error_reporting(E_ALL);
 
 session_start();
-
 
 // 別ファイルの呼び出し
 require 'vendor/autoload.php';
