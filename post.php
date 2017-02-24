@@ -29,7 +29,7 @@ if ($check === true) {
 } elseif ($check === false) {
     $error_msg[] ='不正なidです。';
     $_SESSION['result'] = $error_msg;
-    header("Location: /mybbs/index.php");
+    header("Location: index.php");
     exit();
 }
 
@@ -51,14 +51,14 @@ if ($validate === true) {
 
     $result = $stm->execute();
 
-    header("Location: /mybbs/index.php");
+    header("Location: index.php");
     exit();
   // 返信のバリデーションが通らなかった場合
 } elseif(isset($_POST['reply_post'])) {
-    header("Location: /mybbs/reply.php");
+    header("Location: reply.php");
     exit();
   // 新規投稿のバリデーションが通らなかった場合
 } elseif(isset($_POST['form_post'])) {
-    header("Location: /mybbs/index.php");
+    header("Location: index.php");
     exit();
 }

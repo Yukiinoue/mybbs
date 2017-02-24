@@ -38,7 +38,7 @@ if ($check === true) {
     // post_idのチェックがfalseの場合の画面遷移
     $error_msg[] = '不正なidです。';
     $_SESSION['result'] = $error_msg;
-    header("Location: /mybbs/index.php");
+    header("Location: index.php");
     exit();
 }
 
@@ -54,7 +54,7 @@ if ($validate === true) {
     $parent_password = $parent_password['password'];
 } else {
     // バリデーションが通らなかった時の画面の遷移
-    header("Location: /mybbs/delete.php");
+    header("Location: delete.php");
     exit();
 }
 

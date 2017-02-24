@@ -56,5 +56,5 @@ $stm->bindValue(':id', $parent_id);
 
 $stm->execute();
 
-header("Location: /mybbs/index.php?post_id=$parent_id");
+header("Location: index.php?post_id=$parent_id");
 exit();

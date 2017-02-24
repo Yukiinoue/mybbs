@@ -27,7 +27,7 @@ if (isset($_POST['post_id'])) {
 } else {
     $error_msg[] = '不正なidです。';
     $_SESSION['result'] = $error_msg;
-    header("Location: /mybbs/index.php");
+    header("Location: index.php");
     exit();
 }
 
@@ -44,7 +44,7 @@ $data['message'] = $message;
 if (empty($data['parent_post'])) {
     $error_msg[] = '返信対象記事がありません。';
     $_SESSION['result'] = $error_msg;
-    header("Location: /mybbs/index.php");
+    header("Location: index.php");
     exit();
 }
 // templateの出力
