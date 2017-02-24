@@ -14,65 +14,42 @@ require "include/model/db.php";
 $con = db_connect();
 
 // post_idのチェック
-// リクエスト値の有無
-if (isset($_REQUEST)) {
-    if (isset($_POST['post_id'])) {
-        // フォームの入力内容を変数に格納
-        $parent_id = $_POST['post_id'];
-        $password = $_POST['password'];
-
-        $check = true;
-    } else {
-        $check = false;
-    }
-} else {
-    $check = false;
+$parent_id = isset($_POST['post_id']) ? $_POST['post_id'] : null;
+if (! $parent_id) {
+    die('post_idがありません。');
 }
 
-// $checkのtrue or falseでの条件分岐
-if ($check === true) {
-    // バリデーションメッセージの格納
-    $validate = delete_validation($password);
-    $_SESSION['result'] = $validate;
-} elseif($check === false) {
-    // post_idのチェックがfalseの場合の画面遷移
-    $error_msg[] = '不正なidです。';
-    $_SESSION['result'] = $error_msg;
-    header("Location: index.php");
+// 記事の有無をチェック
+$post = get_parent($con, $parent_id);
+if (! $post) {
+    die('記事がありません。');
+}
+
+// パスワードの有無をチェック
+$password = isset($_POST['password']) ? $_POST['password'] : null;
+
+// バリデーションメッセージの格納
+$validate = delete_validation($password);
+$_SESSION['result'] = $validate;
+
+// バリデーションが通らなかった時の画面の遷移
+if ($validate !== true) {
+    header("Location: delete.php?post_id=$parent_id");
     exit();
 }
 
-// 削除対象記事のパスワードを取得
-if ($validate === true) {
-    $parent_password = array();
-    $sth = $con->prepare("SELECT password FROM post WHERE id = :id");
-    $sth->bindValue('id', $parent_id);
-
-    $sth->execute();
-
-    $parent_password = $sth->fetch(PDO::FETCH_ASSOC);
-    $parent_password = $parent_password['password'];
-} else {
-    // バリデーションが通らなかった時の画面の遷移
-    header("Location: delete.php");
-    exit();
-}
-
-// 削除処理
-if ($password == $parent_password) {
-    // 記事本文の更新
-    $stm = $con->prepare("DELETE FROM post WHERE password = :password");
-    $stm->bindValue(':password', $password);
-
-    $stm->execute();
-
-    header("Location: /mybbs/index.php");
-    exit();
-} else {
-    // エラーメッセージの表示
+// エラーメッセージの表示
+if ($password !== $post['password']) {
     $error_msg[] = 'パスワードが間違っています。';
     $_SESSION['result'] = $error_msg;
-    $_SESSION['post_id'] = $parent_id;
-    header("Location: /mybbs/delete.php");
+    header("Location: delete.php?post_id=$parent_id");
     exit();
 }
+// 削除処理
+$stm = $con->prepare("DELETE FROM post WHERE password = :password");
+$stm->bindValue(':password', $password);
+
+$stm->execute();
+
+header("Location: index.php");
+exit();
