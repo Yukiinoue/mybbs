@@ -21,9 +21,7 @@ if (isset($_SESSION['result'])) {
     unset($_SESSION['result']);
 }
 
-// 編集対象の親記事のid取得
-$error_msg = array();
-
+// post_idのチェック
 $parent_id = isset($_REQUEST['post_id']) ? $_REQUEST['post_id'] : null;
 if (! $parent_id) {
     die('post_idがありません。');
