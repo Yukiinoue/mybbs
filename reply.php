@@ -1,13 +1,17 @@
 <?php
-
+// エラー表示
 ini_set("display_errors", "On");
 error_reporting(E_ALL);
 
 session_start();
+
 // 別ファイルの呼び出し
 require 'vendor/autoload.php';
 require 'include/conf/twig.php';
 require 'include/model/db.php';
+
+// DB接続
+$con = db_connect();
 
 // バリデーションメッセージの受け取り、変数格納
 $message = null;
@@ -17,23 +21,11 @@ if (isset($_SESSION['result'])) {
     unset($_SESSION['result']);
 }
 
-// 返信対象の親記事のid取得
-$error_msg = array();
-
-if (isset($_POST['post_id'])) {
-    $parent_id = $_POST['post_id'];
-} elseif(isset($_SESSION['post_id'])){
-    $parent_id = $_SESSION['post_id'];
-} else {
-    $error_msg[] = '不正なidです。';
-    $_SESSION['result'] = $error_msg;
-    header("Location: index.php");
-    exit();
+// post_idのチェック
+$parent_id = isset($_REQUEST['post_id']) ? $_REQUEST['post_id'] : null;
+if (! $parent_id) {
+    die('post_idがありません。');
 }
-
-
-// DB接続
-$con = db_connect();
 
 // 返信対象の親記事とバリデーションメッセージの格納
 $data = array();
@@ -41,12 +33,10 @@ $data = array();
 $data['parent_post'] = get_parent($con, $parent_id);
 $data['message'] = $message;
 
-if (empty($data['parent_post'])) {
-    $error_msg[] = '返信対象記事がありません。';
-    $_SESSION['result'] = $error_msg;
-    header("Location: index.php");
-    exit();
+if (! $data['parent_post']) {
+    die('編集対象記事がありません。');
 }
+
 // templateの出力
 $view = 'reply.html';
 twig_view($view,$data);
