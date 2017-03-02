@@ -46,8 +46,9 @@ if ($password !== $post['password']) {
     exit();
 }
 // 削除処理
-$stm = $con->prepare("DELETE FROM post WHERE password = :password");
+$stm = $con->prepare("DELETE FROM post WHERE password = :password AND id = :id");
 $stm->bindValue(':password', $password);
+$stm->bindValue(':id', $parent_id);
 
 $stm->execute();
 
