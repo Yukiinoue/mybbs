@@ -23,8 +23,13 @@ if (isset($_SESSION['result'])) {
 // DB接続
 $con = db_connect();
 
+// 画像データの取得
+$files = get_files($con);
+
 // 投稿記事の取得
 $posts = get_post($con);
+
+// header('Content-type: image/jpeg');
 
 // 返信記事ツリーデータの取得
 $tree = get_tree($con, $posts);

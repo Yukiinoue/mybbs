@@ -4,9 +4,9 @@
   <body id="body"　class="wf-nicomoji">
     <div id="all">
       <div class="wrapper clearfix">
-      {% include 'header.html' %}  
+      {% include 'header.html' %}
         <div class="form-wrap">
-          <form action="post.php" method="post" accept-charset="utf-8">
+          <form action="post.php" method="post" accept-charset="utf-8" enctype="multipart/form-data">
             <h2 class="sub-ttl">とうこうフォーム</h2>
             {% include 'form_message.html' %}
             <div class="text-box form-group">
@@ -23,6 +23,10 @@
                 <span class="">
                   <input class="form-password from-control" type="password" name="password"><br>
                 </span>
+              </div>
+              <div class="upload-wrap">
+                <span class="form-item">ファイルアップロード</span>
+                  <input type="file" name="upload"  accept="image/*">
               </div>
               <span class="post-btn">
                 <input class="form-text btn btn-primary" type="submit" name="form_post" value="そうしん">

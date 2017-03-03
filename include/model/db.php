@@ -27,7 +27,6 @@ function get_tree($con, $parent_posts)
     $tree = array();
     foreach ($parent_posts as $key=>$post)
     {
-
         // 親記事に対する返信一覧を取得
         $posts = get_post($con, $post['id']);
         // 親記事自体を格納
@@ -62,4 +61,24 @@ function delete_post ($con, $parent_id)
 
     $sth->bindValue(':id', $id);
     $sth->execute();
+}
+
+// 新規投稿時に割り振られた記事idの取得
+function get_latest_post_id ($con)
+{
+    $sth = $con->prepare("SELECT `id` FROM post ORDER BY `id` DESC LIMIT 1");
+
+    $sth->execute();
+    $id = $sth->fetch(PDO::FETCH_ASSOC);
+    return $id['id'];
+}
+
+// 投稿された画像の取得
+function get_files ($con)
+{
+    $stm = $con->prepare("SELECT `contents` FROM file");
+
+    $stm->execute();
+    $files = $stm->fetch(PDO::FETCH_ASSOC);
+    return $files;
 }
