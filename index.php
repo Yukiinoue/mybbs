@@ -1,5 +1,4 @@
 <?php
-gd_info();
 // エラー表示
 ini_set("display_errors", "on");
 error_reporting(E_ALL);
@@ -24,14 +23,9 @@ if (isset($_SESSION['result'])) {
 // DB接続
 $con = db_connect();
 
-// 画像データの取得
-$post_id = null;
-
 // 投稿記事の取得
-$reply_id = 0;
-$posts = get_post($con, $reply_id);
-// header('Content-Type: image/jpeg');
-
+$posts = get_post($con);
+var_dump($posts);
 // 返信記事ツリーデータの取得
 $tree = get_tree($con, $posts);
 
