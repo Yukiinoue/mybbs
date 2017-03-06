@@ -12,10 +12,6 @@ function get_post($con, $reply_id = 0)
     // 初期化
     $posts = array();
 
-    // 画像データを全件取得
-    $sth = $con->prepare("SELECT `post_id`,`contents` FROM file");
-    $sth->execute();
-    $files_data = $sth->fetchAll(PDO::FETCH_ASSOC);
 
     // 親記事データを全件取得
     $sth = $con->prepare("SELECT * FROM post WHERE reply_id = :reply_id ORDER BY id DESC");
@@ -25,6 +21,11 @@ function get_post($con, $reply_id = 0)
 
 
     foreach ($posts as $key => $post) {
+        // 画像データを全件取得
+        $sth = $con->prepare("SELECT `contents` FROM file WHERE `post_id`");
+        $sth->execute();
+        $files_data = $sth->fetch(PDO::FETCH_ASSOC);
+
         $posts[$key]['files'] = [];
     }
 
