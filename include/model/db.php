@@ -12,13 +12,28 @@ function get_post($con, $reply_id = 0)
     // 初期化
     $posts = array();
 
-    // 一覧データの取得
+    // 画像データを全件取得
+    $sth = $con->prepare("SELECT `post_id`,`contents` FROM file");
+    $sth->execute();
+    $files_data = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+    // 親記事データを全件取得
     $sth = $con->prepare("SELECT * FROM post WHERE reply_id = :reply_id ORDER BY id DESC");
     $sth->bindValue(':reply_id', $reply_id);
     $sth->execute();
     $posts = $sth->fetchAll(PDO::FETCH_ASSOC);
 
-    return $posts;
+    // foreach ($files_data as $file) {
+    //     foreach ($posts as $key => $post) {
+    //
+    //         if ($file['post_id'] === $posts['id'])
+    //         {
+    //             $posts[$key]['image'] = $file['contents'];
+    //         }
+    //
+    //     }
+    // }
+        return $posts;
 }
 
 // ツリー型一覧データの形成
@@ -73,12 +88,14 @@ function get_latest_post_id ($con)
     return $id['id'];
 }
 
-// 投稿された画像の取得
-function get_files ($con)
-{
-    $stm = $con->prepare("SELECT `contents` FROM file");
-
-    $stm->execute();
-    $files = $stm->fetch(PDO::FETCH_ASSOC);
-    return $files;
-}
+// 投稿された画像の取得（単一の画像）
+// function get_file ($con, $id)
+// {
+//     $sth = $con->prepare("SELECT `contents` FROM file WHERE id = :id");
+//
+//     $sth->bindValue(':id', $id);
+//     $sth->execute();
+//     $files = $sth->fetch(PDO::FETCH_ASSOC);
+//
+//     return $files;
+// }

@@ -1,6 +1,7 @@
 <?php
+gd_info();
 // エラー表示
-ini_set("display_errors", "On");
+ini_set("display_errors", "on");
 error_reporting(E_ALL);
 
 // セッション開始
@@ -24,15 +25,16 @@ if (isset($_SESSION['result'])) {
 $con = db_connect();
 
 // 画像データの取得
-$files = get_files($con);
+$post_id = null;
 
 // 投稿記事の取得
-$posts = get_post($con);
-
-// header('Content-type: image/jpeg');
+$reply_id = 0;
+$posts = get_post($con, $reply_id);
+// header('Content-Type: image/jpeg');
 
 // 返信記事ツリーデータの取得
 $tree = get_tree($con, $posts);
+
 // $treeと$messageを$dataにまとめる
 $data = array();
 
