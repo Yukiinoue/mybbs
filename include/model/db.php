@@ -24,11 +24,11 @@ function get_post($con, $reply_id = 0)
     $posts = $sth->fetchAll(PDO::FETCH_ASSOC);
 
 
-        foreach ($posts as $key => $post) {
-            $posts[$key]['files'] = [];
-        }
-        
-        return $posts;
+    foreach ($posts as $key => $post) {
+        $posts[$key]['files'] = [];
+    }
+
+    return $posts;
 }
 
 // ツリー型一覧データの形成
