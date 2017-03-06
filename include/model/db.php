@@ -22,11 +22,12 @@ function get_post($con, $reply_id = 0)
 
     foreach ($posts as $key => $post) {
         // 画像データを全件取得
-        $sth = $con->prepare("SELECT `contents` FROM file WHERE `post_id`");
+        $sth = $con->prepare("SELECT * FROM file WHERE `post_id` = :post_id");
+        $sth->bindValue(':post_id', $post['id']);
         $sth->execute();
         $files_data = $sth->fetch(PDO::FETCH_ASSOC);
 
-        $posts[$key]['files'] = [];
+        $posts[$key]['files'] = $files_data;
     }
 
     return $posts;
