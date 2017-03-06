@@ -25,7 +25,7 @@ function get_post($con, $reply_id = 0)
         $sth = $con->prepare("SELECT * FROM file WHERE `post_id` = :post_id");
         $sth->bindValue(':post_id', $post['id']);
         $sth->execute();
-        $files_data = $sth->fetch(PDO::FETCH_ASSOC);
+        $files_data = $sth->fetchAll(PDO::FETCH_ASSOC);
 
         $posts[$key]['files'] = $files_data;
     }
