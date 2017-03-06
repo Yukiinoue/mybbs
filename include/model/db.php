@@ -23,16 +23,11 @@ function get_post($con, $reply_id = 0)
     $sth->execute();
     $posts = $sth->fetchAll(PDO::FETCH_ASSOC);
 
-    // foreach ($files_data as $file) {
-    //     foreach ($posts as $key => $post) {
-    //
-    //         if ($file['post_id'] === $posts['id'])
-    //         {
-    //             $posts[$key]['image'] = $file['contents'];
-    //         }
-    //
-    //     }
-    // }
+
+        foreach ($posts as $key => $post) {
+            $posts[$key]['files'] = [];
+        }
+        
         return $posts;
 }
 
