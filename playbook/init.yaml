@@ -1,0 +1,77 @@
+---
+- hosts: all
+  vars:
+    install_packages:
+      - php
+      - php-mysql
+      - php-mbstring
+      - php-dom
+      - php-mcrypt
+      - memcached
+      - php-pear
+      - php-pecl-memcache
+      - mysql-server
+      - MySQL-python
+    run_services:
+      - memcached
+      - mysqld
+      - httpd
+    zsh_theme: awesomepanda
+
+  tasks:
+    - name: Update Packages
+      yum: name=* update_cache=yes
+
+    - name: Import RPM
+      sudo: true
+      yum: name=http://rpms.famillecollet.com/enterprise/remi-release-6.rpm state=present
+
+    - name: Install required packages
+      sudo: true
+      yum: name={{ item }} state=latest enablerepo=remi,remi-php70
+      with_items: "{{ install_packages }}"
+
+    - name: Start services
+      sudo: true
+      service: name={{ item }} state=started
+      with_items: "{{ run_services }}"
+
+    - name: Modify php.ini
+      sudo: true
+      template: >
+        src=setting/php.ini
+        dest=/etc/php.ini
+
+    - name: Modify httpd.conf
+      sudo: true
+      template: >
+        src=setting/httpd.conf
+        dest=/etc/httpd/conf/httpd.conf
+
+    - name: Restart httpd
+      sudo: true
+      command: /etc/init.d/httpd restart
+
+    - name: Modify my.cnf
+      sudo: true
+      template: >
+        src=setting/my.cnf
+        dest=/etc/my.cnf
+
+    - name: Restart mysql
+      sudo: true
+      command: /etc/init.d/mysqld restart
+
+    - name: Install lang
+      sudo: true
+      command: yum -y groupinstall "Jananese Support"
+
+    - name: Set lang
+      sudo: true
+      command: localedef -f UTF-8 -i ja_JP ja_JP.utf8
+
+    - name: Set i18n
+      sudo: true
+      template: >
+        src=setting/i18n
+        dest=/etc/sysconfig/i18n
