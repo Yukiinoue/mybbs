@@ -103,6 +103,11 @@
     margin-bottom: 40px;
     }
 
+  /* .image-wrapper */
+  .image-wrapper {
+    width: 250px;
+    margin: 0 auto;
+    }
   /* .reply */
   .reply {
     float: left;
