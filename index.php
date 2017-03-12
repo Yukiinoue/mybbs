@@ -25,7 +25,7 @@ $con = db_connect();
 
 // 投稿記事の取得
 $posts = get_post($con);
-var_dump($posts);
+
 // 返信記事ツリーデータの取得
 $tree = get_tree($con, $posts);
 
