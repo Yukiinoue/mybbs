@@ -4,5 +4,10 @@
     <span class="post-date">{{ row.post_date }}</span><br>
   </div>
   <p class="post-body">{{ row.form_body }}</p><br>
+  <div class="image-wrapper">
+    {% for files in row.files %}
+      <img src="data:image/jpeg;base64,{{ files.contents }}" alt="投稿画像" width="auto" height="200px">
+    {% endfor %}
+  </div>
   {% include 'btn-wrapper.html' %}
 </div>
