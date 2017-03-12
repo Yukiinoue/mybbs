@@ -33,6 +33,7 @@ $password = isset($_POST['password']) ? $_POST['password'] : null;
 $post_date = date('Y年m月d日 H:i');
 // アップロードファイルの有無をチェック
 $file = isset($_FILES['upload']) ? $_FILES['upload'] : null;
+
 // 文字列を読み込む
 $get_file = base64_encode(file_get_contents($file['tmp_name']));
 
@@ -69,12 +70,21 @@ $result = $stm->execute();
 
 // アップロード画像が存在すれば、DBへ保存
 if($file) {
-    if ($parent_id === null) {
-        $parent_id = get_latest_post_id($con);
-    }
-    $stm = $con->prepare("INSERT INTO file(post_id,file_name,type,contents) values(:parent_id,:file_name,:type,:contents)");
+    $stm = $con->prepare("INSERT INTO file(post_id,file_name,type,contents) values(:id,:file_name,:type,:contents)");
 
-    $stm->bindValue(':parent_id', $parent_id);
+    if ($parent_id === null) {
+            $id = get_latest_post_id($con);
+            $stm->bindValue(':id', $id);
+        }
+    if ($parent_id) {
+        $sth = $con->prepare("SELECT `id` FROM post ORDER BY id DESC LIMIT 1");
+
+        $sth->execute();
+        $id = $sth->fetch();
+
+        $stm->bindValue(':id', $id['id']);
+    }
+
     $stm->bindValue(':file_name', $file['name']);
     $stm->bindValue(':type', $file['type']);
     $stm->bindValue(':contents', $get_file);
