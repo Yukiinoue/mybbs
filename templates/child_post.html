@@ -8,6 +8,11 @@
         <span class="post-date">{{ children_row.post_date }}</span>
       </div>
       <p class="post-body">{{ children_row.form_body }}</p>
+      <div class="image-wrapper">
+        {% for children_files in children_row.files %}
+          <img src="data:image/jpeg;base64,{{ children_files.contents }}" alt="投稿画像" width="250px" height="150px">
+        {% endfor %}
+      </div>
       {% include 'btn-wrapper.html' with {row: children_row} %}
       </div>
       {% include 'child_post.html' with {row: children_row} %}
