@@ -34,7 +34,7 @@ $post_date = date('Y年m月d日 H:i');
 // アップロードファイルの有無をチェック
 $file = isset($_FILES['upload']) ? $_FILES['upload'] : null;
 // 文字列を読み込む
-$get_file = file_get_contents($file['tmp_name']);
+$get_file = base64_encode(file_get_contents($file['tmp_name']));
 
 // バリデーションメッセージの格納
 $validate = validation($name, $form_body);
