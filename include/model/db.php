@@ -27,7 +27,11 @@ function get_post($con, $reply_id = 0)
         $sth->execute();
         $files_data = $sth->fetchAll(PDO::FETCH_ASSOC);
 
-        $posts[$key]['files'] = $files_data;
+        $posts[$key]['files'] = array_map(function($file){
+            $file['contents']= base64_encode($file['contents']);
+            return $file;
+        }, $files_data);
+
     }
 
     return $posts;
@@ -46,8 +50,8 @@ function get_tree($con, $parent_posts)
 
         // 取得したchildrenを親とした返信一覧の取得し、ループ
         $tree[$key]['children'] = get_tree($con, $posts);
-    }
 
+    }
     // ツリー型一覧データの返却
     return $tree;
 }
@@ -58,6 +62,7 @@ function get_parent($con, $parent_id)
     // 配列の初期化
     $parent_post = array();
     $sth = $con->prepare("SELECT * FROM post WHERE id = :parent_id");
+
     $sth->bindValue(':parent_id', $parent_id);
     $sth->execute();
 
@@ -66,7 +71,7 @@ function get_parent($con, $parent_id)
     return $parent_post;
 }
 
-//　削除処理
+// 削除処理
 function delete_post ($con, $parent_id)
 {
     $sth = $con->prepare("DELETE FROM post WHERE id=:id");
