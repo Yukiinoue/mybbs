@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 {% include 'head.html' %}
-  <body id="body"　class="wf-nicomoji">
+  <body id="body" class="wf-nicomoji">
   <div id="all">
     <div class="wrapper clearfix">
       {% include 'header.html' %}
@@ -15,11 +15,15 @@
             <textarea class="form-body" name="form_body" cols="auto" rows="10">{{ data.parent_post.form_body}}</textarea><br>
             <span class="form-item">記事パスワード</span><br>
             <input class="form-password from-control" type="password" name="password"><br>
-            <span class="post-btn">
-              <input class="form-text" type="submit" name="edit_post" value="へんしゅう">
-            </span>
+            <input type="hidden" name="post_id" value="{{ data.parent_post.id }}">
+            <img src="../file_load.php?id={{ data.parent_post.id }}" alt="投稿画像" width="250px" height="150px">
+            <input type="file" name="upload" accept="image/*,video/*" multiple>
+            <div>
+              <span class="post-btn">
+                <input class="form-text" type="submit" name="edit_post" value="へんしゅう">
+              </span>
+            </div>
           </div>
-          <input type="hidden" name="post_id" value="{{ data.parent_post.id }}">
         </form>
       </div>
       <a href="index.php">
