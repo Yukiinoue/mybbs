@@ -91,13 +91,25 @@ function get_latest_post_id ($con)
 }
 
 // 投稿された画像の取得（単一の画像）
-// function get_file ($con, $id)
-// {
-//     $sth = $con->prepare("SELECT `contents` FROM file WHERE id = :id");
-//
-//     $sth->bindValue(':id', $id);
-//     $sth->execute();
-//     $files = $sth->fetch(PDO::FETCH_ASSOC);
-//
-//     return $files;
-// }
+function get_file($con, $post_id)
+{
+
+    $stm = $con->prepare("SELECT `id` FROM file WHERE post_id = :post_id" );
+
+    $stm->bindValue(':post_id', $post_id);
+    $stm->execute();
+
+    $id = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($parents_id as $key => $parent_id) {
+
+    $sth = $con->prepare("SELECT * FROM file WHERE id = :id");
+
+    $sth->bindValue(':id', $id['id']);
+    $sth->execute();
+    $file[$key] = $sth->fetch(PDO::FETCH_ASSOC);
+
+    }
+
+    return $file;
+}
