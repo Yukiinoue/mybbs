@@ -4,5 +4,7 @@
     <span class="post-date">{{ data.parent_post.post_date }}</span><br>
   </div>
   <p class="post-body">{{ data.parent_post.form_body }}</p><br>
-  <img src="../file_load.php?id={{ data.parent_post.id }}" alt="投稿画像" width="250px" height="150px">
+  {% for file in data.file %}
+    <img src="../file_load.php?id={{ file.id }}" alt="投稿画像" width="250px" height="150px">
+  {% endfor %}
 </div>

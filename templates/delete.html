@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 {% include 'head.html' %}
-  <body id="body"　class="wf-nicomoji">
+  <body id="body" class="wf-nicomoji">
   <div id="all">
     <div class="wrapper clearfix">
       {% include 'header.html' %}
@@ -16,8 +16,7 @@
               <input class="form-text" type="submit" name="delete_post" value="さくじょ">
             </span>
           </div>
-          {{dump(data.parent_post.id)}}
-          <input type="hidden" name="post_id" value="{{ data.parent_post.id }}">
+          <input type="hidden" name="post_id" value="{{ data.parent_post.files.id }}">
         </form>
       </div>
       {% include 'object_post.html' %}

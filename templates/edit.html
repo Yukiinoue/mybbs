@@ -16,7 +16,9 @@
             <span class="form-item">記事パスワード</span><br>
             <input class="form-password from-control" type="password" name="password"><br>
             <input type="hidden" name="post_id" value="{{ data.parent_post.id }}">
-            <img src="../file_load.php?id={{ data.parent_post.id }}" alt="投稿画像" width="250px" height="150px">
+            {% for file in data.file %}
+              <img src="../file_load.php?id={{ file.id }}" alt="投稿画像" width="250px" height="150px">
+            {% endfor %}
             <input type="file" name="upload" accept="image/*,video/*" multiple>
             <div>
               <span class="post-btn">
