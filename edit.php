@@ -31,6 +31,7 @@ if (! $parent_id) {
 $data = array();
 
 $data['parent_post'] = get_parent($con, $parent_id);
+$data['file'] = get_file($con, $parent_id);
 $data['message'] = $message;
 
 if (! $data['parent_post']) {
