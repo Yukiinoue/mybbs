@@ -10,7 +10,7 @@
       <p class="post-body">{{ children_row.form_body }}</p>
       <div class="image-wrapper">
         {% for children_files in children_row.files %}
-          <img src="../file_load.php?id={{ children_files.id }}" alt="投稿画像" width="250px" height="150px">
+          <img src="../file_load.php?id={{ children_files.post_id }}" alt="投稿画像" width="250px" height="150px">
         {% endfor %}
       </div>
       {% include 'btn-wrapper.html' with {row: children_row} %}
