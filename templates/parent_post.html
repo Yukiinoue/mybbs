@@ -6,7 +6,7 @@
   <p class="post-body">{{ row.form_body }}</p><br>
   <div class="image-wrapper">
     {% for files in row.files %}
-      <img src="data:image/jpeg;base64,{{ files.contents }}" alt="投稿画像" width="250px" height="150px">
+      <img src="../file_load.php?id={{ files.id }}" alt="投稿画像" width="250px" height="150px">
     {% endfor %}
   </div>
   {% include 'btn-wrapper.html' %}
