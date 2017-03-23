@@ -13,10 +13,17 @@ function get_post($con, $reply_id = 0, $count_articles = null, $pager = null)
     $posts = array();
 
     // 親記事データを全件取得
-    $sth = $con->prepare("SELECT * FROM post WHERE reply_id = :reply_id ORDER BY id DESC LIMIT $count_articles");
+    if ($count_articles === null) {
+        $sth = $con->prepare("SELECT * FROM post WHERE reply_id = :reply_id ORDER BY id DESC");
+    } else {
+        $sth = $con->prepare("SELECT * FROM post WHERE reply_id = :reply_id ORDER BY id DESC LIMIT :count_articles");
+        $sth->bindValue(':count_articles', $count_articles, PDO::PARAM_INT);
+    }
     $sth->bindValue(':reply_id', $reply_id);
+
     $sth->execute();
     $posts = $sth->fetchAll(PDO::FETCH_ASSOC);
+    var_dump($posts, $count_articles);
 
 
     foreach ($posts as $key => $post) {
