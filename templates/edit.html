@@ -6,7 +6,7 @@
     <div class="wrapper clearfix">
       {% include 'header.html' %}
       <div class="form-wrap">
-        <form action="edit_post.php" method="post" accept-charset="utf-8">
+        <form action="edit_post.php" method="post" accept-charset="utf-8" enctype="multipart/form-data">
           <h2 class="sub-ttl">へんしゅうフォーム</h2>
           {% include 'form_message.html' %}
           <div class="text-box form-group">
@@ -18,8 +18,12 @@
             <input type="hidden" name="post_id" value="{{ data.parent_post.id }}">
             {% for file in data.file %}
               <img src="../file_load.php?id={{ file.id }}" alt="投稿画像" width="250px" height="150px">
+              <input type="hidden" name="file_id" value="{{ file.id }}"
             {% endfor %}
-            <input type="file" name="upload" accept="image/*,video/*" multiple>
+            <div class="upload-wrap">
+              <span class="form-item">ファイルアップロード</span>
+                <input type="file" name="upload" accept="image/*,video/*" multiple>
+            </div>
             <div>
               <span class="post-btn">
                 <input class="form-text" type="submit" name="edit_post" value="へんしゅう">

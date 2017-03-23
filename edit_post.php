@@ -32,6 +32,15 @@ $form_body = isset($_POST['form_body']) ? $_POST['form_body'] : null;
 $password = isset($_POST['password']) ? $_POST['password'] : null;
 $post_date = date('Y年m月d日 H:i');
 
+// ファイルidの有無をチェック
+$file_id = isset($_POST['file_id']) ? $_POST['file_id'] : null;
+
+// ファイルの有無をチェック
+$file = isset($_FILES['upload']) ? $_FILES['upload'] : null;
+
+// 文字列を読み込む
+$get_file = file_get_contents($file['tmp_name']);
+
 // バリデーションメッセージの格納
 $validate = edit_validation($form_body, $password);
 $_SESSION['result'] = $validate;
@@ -56,6 +65,17 @@ $stm->bindValue(':form_body', $form_body);
 $stm->bindValue(':id', $parent_id);
 
 $stm->execute();
+
+if($file) {
+    // ファイルの更新
+    $stm = $con->prepare("UPDATE file SET `file_name`=:file_name, `type`=:type, `contents`= :contents WHERE `id` = :file_id");
+    $stm->bindValue(':file_name', $file['name']);
+    $stm->bindValue(':type', $file['type']);
+    $stm->bindValue(':contents', $get_file);
+    $stm->bindValue(':file_id', $file_id);
+
+    $stm->execute();
+}
 
 header("Location: index.php");
 exit();
