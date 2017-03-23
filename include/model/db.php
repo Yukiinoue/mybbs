@@ -7,7 +7,7 @@ function db_connect ()
 }
 
 // 投稿記事一覧の取得
-function get_post($con, $reply_id = 0, $current_page, $count_page)
+function get_post($con, $reply_id = 0, $current_page = null, $pager = null)
 {
     // 初期化
     $posts = array();
