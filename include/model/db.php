@@ -7,11 +7,10 @@ function db_connect ()
 }
 
 // 投稿記事一覧の取得
-function get_post($con, $reply_id = 0, $current_page = null, $pager = null)
+function get_post($con, $reply_id = 0, $count_articles = null, $pager = null)
 {
     // 初期化
     $posts = array();
-
 
     // 親記事データを全件取得
     $sth = $con->prepare("SELECT * FROM post WHERE reply_id = :reply_id ORDER BY id DESC");
