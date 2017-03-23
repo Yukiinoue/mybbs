@@ -101,11 +101,11 @@ function get_file($con, $post_id)
 
     $id = $stm->fetchAll(PDO::FETCH_ASSOC);
 
-    foreach ($parents_id as $key => $parent_id) {
+    foreach ($id as $key => $parent_id) {
 
     $sth = $con->prepare("SELECT * FROM file WHERE id = :id");
 
-    $sth->bindValue(':id', $id['id']);
+    $sth->bindValue(':id', $parent_id['id']);
     $sth->execute();
     $file[$key] = $sth->fetch(PDO::FETCH_ASSOC);
 
