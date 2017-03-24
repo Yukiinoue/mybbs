@@ -24,6 +24,7 @@ function get_post($con, $reply_id = 0, $count_articles = null, $pager = null)
     $sth->execute();
     $posts = $sth->fetchAll(PDO::FETCH_ASSOC);
 
+    var_dump($posts);
     // 親記事の全部の件数を取得する
     $sth = $con->prepare("SELECT FOUND_ROWS()");
     $sth->execute();
