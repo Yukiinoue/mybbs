@@ -24,11 +24,16 @@ function get_post($con, $reply_id = 0, $count_articles = null, $pager = null)
     $sth->execute();
     $posts = $sth->fetchAll(PDO::FETCH_ASSOC);
 
-    var_dump($posts);
-    // 親記事の全部の件数を取得する
-    $sth = $con->prepare("SELECT FOUND_ROWS()");
-    $sth->execute();
-    $parent_row = (int)$sth->fetchColumn();
+    if($count_articles) {
+        // 親記事の全部の件数を取得する
+        $sth = $con->prepare("SELECT FOUND_ROWS()");
+        $sth->execute();
+        $count_parent = (int)$sth->fetchColumn();
+
+        // 全ページ数の取得
+        $whole_pages = ceil($count_parent / $count_articles);
+        echo $whole_pages;
+    }
 
     foreach ($posts as $key => $post) {
         // 画像データを全件取得
