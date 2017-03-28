@@ -21,11 +21,12 @@ if (isset($_SESSION['result'])) {
 }
 
 $page= empty($_GET["page"]) ? 1 : $_GET["page"];
-
+var_dump($page);
 // DB接続
 $con = db_connect();
 
 $count_articles = 10;
+
 // 投稿記事の取得
 $posts = get_post($con, 0, $count_articles, $page);
 $count_rows = count_rows($con);
@@ -38,6 +39,7 @@ $data = array();
 
 $data['tree'] = $tree;
 $data['message'] = $message;
+$data['page'] = paging($count_articles, $count_rows, $page);
 
 // templateの出力
 $view = 'index.html';

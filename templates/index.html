@@ -39,7 +39,9 @@
           {% include 'parent_post.html' %}
           {% include 'child_post.html'%}
         {% endfor %}
-        {{ data}}
+        {% for page in data.page %}
+          {{ page | raw}}
+        {% endfor %}
       </div>
     </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

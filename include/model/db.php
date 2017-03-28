@@ -11,13 +11,15 @@ function get_post($con, $reply_id = 0, $count_articles = null, $pager = null)
 {
     // 初期化
     $posts = array();
+    $min = ($pager * 10) - $count_articles;
 
     // 親記事データを全件取得
     if ($count_articles === null) {
         $sth = $con->prepare("SELECT * FROM post WHERE reply_id = :reply_id ORDER BY id DESC");
     } else {
-        $sth = $con->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM post WHERE reply_id = :reply_id ORDER BY id DESC LIMIT :count_articles");
+        $sth = $con->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM post WHERE reply_id = :reply_id ORDER BY id DESC LIMIT :min, :count_articles");
         $sth->bindValue(':count_articles', $count_articles, PDO::PARAM_INT);
+        $sth->bindValue(':min', $min, PDO::PARAM_INT);
     }
     $sth->bindValue(':reply_id', $reply_id, PDO::PARAM_STR);
 
@@ -111,4 +113,29 @@ function count_rows($con)
     $sth = $con->prepare("SELECT FOUND_ROWS()");
     $sth->execute();
     return (int)$sth->fetchColumn();
+}
+
+// ページング機能
+function paging($count_article, $count_rows, $page, $number=5)
+{
+    // 全ページ数の取得
+    $whole_pages = ceil($count_rows / $count_article);
+
+    // 前のページ番号
+    $privious = $page - 1;
+    // 次のページ番号
+    $next = $page + 1;
+
+    $paging = array();
+    if($page != 1)
+    {
+        $paging[] = "<a href=\"?page=".$privious."\">前へ</a>";
+    }
+
+    if($page < $whole_pages)
+    {
+        $paging[] = "<a href=\"?page=".$next."\">次へ</a>";
+    }
+
+    return $paging;
 }
