@@ -32,8 +32,34 @@ function get_post($con, $reply_id = 0, $count_articles = null, $pager = null)
 
         // 全ページ数の取得
         $whole_pages = ceil($count_parent / $count_articles);
-        echo $whole_pages;
     }
+
+    // $navigation = array();
+
+    // // ページの始点
+    // $start_page = 1;
+    // // ページの終点
+    // $end_page = $whole_pages;
+    // // 次ページの取得
+    // if($pager < $end_page)
+    // {
+    //     $next_page = $pager + 1;
+    // }
+    // // 前ページの取得
+    // if($pager > $start_page)
+    // {
+    //     $previous_page = $pager - 1;
+    // }
+
+    // if($pager != 1)
+    // {
+    //     $navigation[] = '<a href="?page='. $previous_page .'">&laquo; 前へ</a> ';
+    // }
+
+    // if($next_page)
+    // {
+    //     $navigation[] = '<a href="?page='. $next_page .'">次へ&raquo;</a>';
+    // }
 
     foreach ($posts as $key => $post) {
         // 画像データを全件取得
@@ -46,9 +72,10 @@ function get_post($con, $reply_id = 0, $count_articles = null, $pager = null)
             $file['contents']= base64_encode($file['contents']);
             return $file;
         }, $files_data);
-
     }
 
+    // $posts['navigation'] = array();
+    // $posts['navigation'] = $navigation;
     return $posts;
 }
 

@@ -1,4 +1,6 @@
-vendor/composer/autoload_classmap.php
-vendor/composer/autoload_static.php
+vendor/
 composer.lock
 composer.json
+.DS_Store
+_DS_Store
+.vagrant/

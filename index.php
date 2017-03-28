@@ -20,13 +20,15 @@ if (isset($_SESSION['result'])) {
     unset($_SESSION['result']);
 }
 
+$page= empty($_GET["page"]) ? 1 : $_GET["page"];
+
 // DB接続
 $con = db_connect();
 
 $count_articles = 10;
 // 投稿記事の取得
-$posts = get_post($con, 0, $count_articles, null);
-
+$posts = get_post($con, 0, $count_articles, $page);
+var_dump($posts);
 // 返信記事ツリーデータの取得
 $tree = get_tree($con, $posts);
 

@@ -28,6 +28,9 @@ if (! $post) {
 // パスワードの有無をチェック
 $password = isset($_POST['password']) ? $_POST['password'] : null;
 
+// ファイルidの有無をチェック
+$file_id = isset($_POST['file_id']) ? $_POST['file_id'] : null;
+
 // バリデーションメッセージの格納
 $validate = delete_validation($password);
 $_SESSION['result'] = $validate;
@@ -52,5 +55,5 @@ $stm->bindValue(':id', $parent_id);
 
 $stm->execute();
 
-header("Location: index.php");
-exit();
+// header("Location: index.php");
+// exit();
