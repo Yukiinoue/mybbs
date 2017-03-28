@@ -28,7 +28,8 @@ $con = db_connect();
 $count_articles = 10;
 // 投稿記事の取得
 $posts = get_post($con, 0, $count_articles, $page);
-var_dump($posts);
+$count_rows = count_rows($con);
+
 // 返信記事ツリーデータの取得
 $tree = get_tree($con, $posts);
 
