@@ -21,7 +21,7 @@ if (isset($_SESSION['result'])) {
 }
 
 $page= empty($_GET["page"]) ? 1 : $_GET["page"];
-var_dump($page);
+
 // DB接続
 $con = db_connect();
 

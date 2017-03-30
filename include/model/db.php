@@ -126,15 +126,37 @@ function paging($count_article, $count_rows, $page, $number=5)
     // 次のページ番号
     $next = $page + 1;
 
+    // ページ番号
+    // 最初のページ番号の設定
+    $start = ($page - floor($number/2)) > 0 ? ($page - floor($number/2)) : 1;
+    // 最後のページ番号の設定
+    $last = ($start > 1) ? ($page + floor($number/2)) : $number;
+
+    // 全ページ数が最後のページ設定よりも少なかった場合の処理
+    if($whole_pages < $last )
+    {
+        $end = $whole_pages;
+    } else {
+        $end = $last;
+    }
+
     $paging = array();
     if($page != 1)
     {
-        $paging[] = "<a href=\"?page=".$privious."\">前へ</a>";
+        $paging[] = "<a href=\"?page=".$privious."\" class=\"previous_button\">前へ</a>";
+    }
+
+    // 最初のページのリンク
+    for($i = $start; $i<=$end; $i++)
+    {
+        // 現在ページとその他のページでclassを分ける
+        $class = ($page == $i) ? 'class="current"': 'class="page_number"';
+        $paging[] = '<a href="?page='.$i.'"'.$class.'>'.$i.'</a>';
     }
 
     if($page < $whole_pages)
     {
-        $paging[] = "<a href=\"?page=".$next."\">次へ</a>";
+        $paging[] = "<a href=\"?page=".$next."\" class=\"next_button\">次へ</a>";
     }
 
     return $paging;
