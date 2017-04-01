@@ -3,7 +3,7 @@
     <span class="post-name">なまえ:{{ row.name }}</span>
     <span class="post-date">{{ row.post_date }}</span><br>
   </div>
-  <p class="post-body">{{ row.form_body }}</p><br>
+  <p class="post-body">{{ row.form_body|raw }}</p><br>
   <div class="image-wrapper">
     {% for files in row.files %}
       <img src="../file_load.php?id={{ files.id }}" alt="投稿画像" width="250px" height="150px">

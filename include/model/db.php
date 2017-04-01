@@ -35,6 +35,7 @@ function get_tree($con, $parent_posts)
     $tree = array();
     foreach ($parent_posts as $key=>$post)
     {
+        $post['form_body'] = getLink($post['form_body']);
         // 親記事に対する返信一覧を取得
         $posts = get_post($con, $post['id']);
         // 親記事自体を格納
@@ -160,4 +161,19 @@ function paging($count_article, $count_rows, $page, $number=5)
     }
 
     return $paging;
+}
+
+function getLink($form_body)
+{
+    // URL抽出の正規表現
+    $pattern = '/https?:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:@&=+$,%#]+/';
+    // マッチした文字列を処理
+    $form_body = preg_replace_callback($pattern, 'replace', htmlspecialchars($form_body));
+
+    return $form_body;
+}
+
+function replace($matches)
+{
+    return '<a href="'.$matches[0].'">'.$matches[0].'</a>';
 }
