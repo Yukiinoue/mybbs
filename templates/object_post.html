@@ -3,7 +3,7 @@
     <span class="post-name">なまえ:{{ data.parent_post.name }}</span>
     <span class="post-date">{{ data.parent_post.post_date }}</span><br>
   </div>
-  <p class="post-body">{{ data.parent_post.form_body }}</p><br>
+  <p class="post-body">{{ data.parent_post.form_body |raw }}</p><br>
   {% for file in data.file %}
     <img src="../file_load.php?id={{ file.id }}" alt="投稿画像" width="250px" height="150px">
   {% endfor %}

@@ -61,6 +61,8 @@ function get_parent($con, $parent_id)
 
     $parent_post = $sth->fetch(PDO::FETCH_ASSOC);
 
+    $parent_post['form_body'] = getLink($parent_post['form_body']);
+
     return $parent_post;
 }
 
