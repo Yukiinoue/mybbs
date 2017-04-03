@@ -12,7 +12,7 @@
           <div class="text-box form-group">
             <span class="form-item">なまえ</span><span class="parent_name">{{ data.parent_post.name }}</span>
             <span class="form-item">ほんぶん</span><br>
-            <textarea class="form-body" name="form_body" cols="auto" rows="10">{{ data.parent_post.form_body}}</textarea><br>
+            <textarea class="form-body" name="form_body" cols="auto" rows="10">{{ data.parent_post.form_body |striptags}}</textarea><br>
             <span class="form-item">記事パスワード</span><br>
             <input class="form-password from-control" type="password" name="password"><br>
             <input type="hidden" name="post_id" value="{{ data.parent_post.id }}">
