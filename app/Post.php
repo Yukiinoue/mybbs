@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Illuminate\Database\Ardent\Ardent;
+use \LaravelArdent\Ardent\Ardent;
 
 class Post extends Ardent
 {

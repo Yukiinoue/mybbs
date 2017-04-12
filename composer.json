@@ -14,7 +14,7 @@
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~5.7",
-        "benconstable/phpspec-laravel": "~3.0@dev"
+        "benconstable/phpspec-laravel1": "~3.0@dev"
     },
     "autoload": {
         "classmap": [
