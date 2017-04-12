@@ -1,0 +1,2 @@
+extensions:
+  PhpSpec\Laravel\Extension\LaravelExtension: ~
