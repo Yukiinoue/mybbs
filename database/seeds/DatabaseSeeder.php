@@ -30,7 +30,7 @@ class PostsTableSeeder extends Seeder
 
 		$faker = Faker::create('ja_JP');
 
-		for($i=0; $i < 10; $i++)
+		for($i=0; $i < 20; $i++)
 		{
 			Post::create([
 				'name' => $faker->name(),
