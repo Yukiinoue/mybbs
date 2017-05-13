@@ -10,6 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// Top Page
 Route::get('/', 'BbsController@index');
+
+// Create Page
+Route::get('/create', 'PostController@create');
 
