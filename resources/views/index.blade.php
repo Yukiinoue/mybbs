@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>井上のBBS</title>
-</head>
-<body>
+@extends('layout')
+
+@section('content')
     <h1>井上のBBS</h1>
-    @foreach($posts as $post)
+    @foreach($post_list as $post)
         <article>
             <h2>
                 <a href="{{ url('posts', $post->id)}}">
@@ -20,5 +14,5 @@
             </div>
         </article>
     @endforeach
-</body>
-</html>
+    {{ $post_list->appends(['sort' => 'votes'])->links() }}
+@endsection
