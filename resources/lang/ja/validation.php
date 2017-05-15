@@ -103,6 +103,11 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name' => '名前',
+        'body' => '本文',
+        'password' => 'パスワード',
+        'posted_at' => '投稿日',
+    ],
 
 ];
