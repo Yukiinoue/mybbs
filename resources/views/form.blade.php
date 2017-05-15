@@ -1,3 +1,13 @@
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 {!! Form::open(array('action' => "PostController@$type")) !!}
     <div class="form-group">
         {!! Form::label('name', '名前:') !!}
@@ -6,6 +16,10 @@
     <div class="form-group">
         {!! Form::label('body', '本文:') !!}
         {!! Form::textarea('body', null,['class' => 'form-control']) !!}
+    </div>
+    <div class="form-group">
+        {!! Form::label('password', 'パスワード:') !!}
+        {!! Form::text('password', null,['class' => 'form-control']) !!}
     </div>
     <div class="form-group">
         {!! Form::label('posted_at', '投稿日:') !!}
