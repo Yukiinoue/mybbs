@@ -13,6 +13,6 @@
 // Top Page
 Route::get('/', 'BbsController@index');
 
-// Create Page
-Route::get('/create', 'PostController@create');
+// Create
+Route::post('/create', 'PostController@create');
 
