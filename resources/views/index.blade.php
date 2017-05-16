@@ -2,7 +2,10 @@
 
 @section('content')
     <h1>井上のBBS</h1>
-    @include('form',['type' => 'create'])
+    @include('errors.form_errors')
+    {!! Form::open(array('action' => 'PostController@create')) !!}
+        @include('form',['posted_at' => date('Y-m-d'), 'submitButton' => '新規投稿'])
+    {!! Form::close() !!}
     @foreach($post_list as $post)
         <article class=post_box>
             <h2 class="name">
@@ -11,7 +14,7 @@
             <div class="body">
                 {{ $post->body }}
             </div>
-            <div class="edit_btn"></div>
+            {!! link_to(action('PostController@edit', [$post->id]), '編集', ['class' => 'btn btn-primary']) !!}
         </article>
     @endforeach
     {{ $post_list->appends(['sort' => 'votes'])->links() }}
