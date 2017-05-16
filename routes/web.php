@@ -20,3 +20,5 @@ Route::post('/create', 'PostController@create');
 Route::get('/{id}/edit', 'PostController@edit');
 Route::patch('/{id}', 'PostController@update');
 
+// Delete
+Route::delete('/{id}', 'PostController@delete');
