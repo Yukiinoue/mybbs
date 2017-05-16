@@ -15,6 +15,7 @@ class PostController extends Controller
     public function create(PostRequest $request)
     {
         Post::create($request->all());
+        \Session::flash('flash_message', '記事を作成しました。');
 
         return redirect('/');
     }
@@ -31,6 +32,7 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
 
         $post->update($request->all());
+        \Session::flash('flash_message', '記事を編集しました。');
 
         return redirect('/');
     }
@@ -40,6 +42,7 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
 
         $post->delete();
+        \Session::flash('flash_message', '記事を削除しました。');
 
         return redirect('/');
     }
