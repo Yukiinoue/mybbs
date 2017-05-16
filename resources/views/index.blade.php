@@ -15,6 +15,11 @@
                 {{ $post->body }}
             </div>
             {!! link_to(action('PostController@edit', [$post->id]), '編集', ['class' => 'btn btn-primary']) !!}
+
+            <br/>
+            <br/>
+
+            {!! delete_form(['/', $post->id]) !!}
         </article>
     @endforeach
     {{ $post_list->appends(['sort' => 'votes'])->links() }}
