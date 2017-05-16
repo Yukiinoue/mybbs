@@ -16,3 +16,7 @@ Route::get('/', 'BbsController@index');
 // Create
 Route::post('/create', 'PostController@create');
 
+// Edit
+Route::get('/{id}/edit', 'PostController@edit');
+Route::patch('/{id}', 'PostController@update');
+
