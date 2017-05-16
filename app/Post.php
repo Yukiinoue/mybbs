@@ -29,6 +29,13 @@ class Post extends Model
      */
      protected $fillable = ['reply_id','name', 'body', 'password', 'posted_at'];
 
+    /**
+     * 日付ミューテーターの指定
+     *
+     * @var array
+     */
+     protected $dates = ['posted_at'];
+
     // ファイルとの関連性
     public function files()
     {
