@@ -14,7 +14,8 @@
             <div class="body">
                 {{ $post->body }}
             </div>
-            {!! link_to(action('PostController@edit', [$post->id]), '編集', ['class' => 'btn btn-primary']) !!}
+            {!! link_to(action('BbsController@replyPage', [$post->id]), '返信', ['class' => 'btn btn-info']) !!}
+            {!! link_to(action('BbsController@editPage', [$post->id]), '編集', ['class' => 'btn btn-primary']) !!}
 
             <br/>
             <br/>
