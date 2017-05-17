@@ -17,8 +17,12 @@ Route::get('/', 'BbsController@index');
 Route::post('/create', 'PostController@create');
 
 // Edit
-Route::get('/{id}/edit', 'PostController@edit');
+Route::get('/{id}/edit', 'BbsController@editPage');
 Route::patch('/{id}', 'PostController@update');
 
 // Delete
 Route::delete('/{id}', 'PostController@delete');
+
+// Reply
+Route::get('/{id}/reply', 'BbsController@replyPage');
+Route::post('/replyPost', 'PostController@replyPost');
