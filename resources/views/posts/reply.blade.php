@@ -8,7 +8,7 @@
 
     @include('errors.form_errors')
 
-    {!! Form::open(array('action' => 'PostController@replyPost')) !!}
+    {!! Form::open(array('action' => 'PostController@replyCreate')) !!}
         @include('form', ['posted_at' => date('Y-m-d'), 'submitButton' => '返信'])
         <input type="hidden" name="id" value="{{$post->id}}">
     {!! Form::close() !!}

@@ -20,7 +20,7 @@ class PostController extends Controller
         return redirect('/');
     }
 
-    public function replyPost(PostRequest $request)
+    public function replyCreate(PostRequest $request)
     {
         Post::addPost($request->all(), $request->input('id'));
 

@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 // Top Page
 Route::get('/', 'BbsController@index');
 
@@ -25,4 +26,4 @@ Route::delete('/{id}', 'PostController@delete');
 
 // Reply
 Route::get('/{id}/reply', 'BbsController@replyPage');
-Route::post('/replyPost', 'PostController@replyPost');
+Route::post('/replyPost', 'PostController@replyCreate');
