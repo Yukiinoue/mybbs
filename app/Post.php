@@ -42,16 +42,15 @@ class Post extends Model
         return $this->hasMany('App\File');
     }
 
-    // 記事投稿メソッド
-    // static function create($request)
-    // {
-    //     $post = Post::create([
-    //         'reply_id' => '$reply_id',
-    //         'name' => $request['name'],
-    //         'body' => $request['body'],
-    //         'password' => $request['password'],
-    //         'posted_at' => Carbon::today(),
-    //     ]);
-    // }
+    static function addPost($request, $reply_id)
+    {
+        $post = Post::create([
+            'reply_id' => $reply_id,
+            'name' => $request['name'],
+            'body' => $request['body'],
+            'password' => $request['password'],
+            'posted_at' => Carbon::today(),
+        ]);
+    }
 }
 
