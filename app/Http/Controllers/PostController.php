@@ -20,11 +20,13 @@ class PostController extends Controller
         return redirect('/');
     }
 
-    public function edit($id)
+    public function replyPost(PostRequest $request)
     {
-        $post = Post::findOrFail($id);
+        Post::addPost($request->all(), $request->input('id'));
 
-        return view('posts.edit', compact('post'));
+        \Session::flash('flash_message', '返信記事を作成しました。');
+
+        return redirect('/');
     }
 
     public function update($id, PostRequest $request)
