@@ -13,10 +13,20 @@ class BbsController extends Controller
 	public function index()
 	{
 		// 最新記事10件の取得
-		$post_list = DB::table('posts')->where('posted_at', '<=', Carbon::now())->orderBy('id', 'desc')->paginate(10);
+		$post_list = DB::table('posts')->where('posted_at', '<=', Carbon::now())->where('reply_id', 0)->orderBy('id', 'desc')->paginate(10);
 		$post_list->setPath('/');
 
 		return view('index', compact('post_list'));
+	}
+
+	public function replyList($id)
+	{
+		// 返信記事の取得
+		$post_list = DB::table('posts')->where('posted_at', '<=', Carbon::now())->where('reply_id', '=', $id)->orderBy('id', 'desc')->paginate(10);
+		$post_list->setPath('/');
+
+
+		return view('replyList', compact('post_list'));
 	}
 
     public function editPage($id)
