@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\File;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
@@ -15,6 +16,7 @@ class PostController extends Controller
     public function create(PostRequest $request)
     {
         Post::create($request->all());
+
         \Session::flash('flash_message', '記事を作成しました。');
 
         return redirect('/');
