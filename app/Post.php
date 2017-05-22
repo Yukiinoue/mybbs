@@ -42,7 +42,13 @@ class Post extends Model
         return $this->hasMany('App\File');
     }
 
-    static function addPost($request, $reply_id)
+    // 子記事との関連性
+    public function children()
+    {
+        return $this->hasMany('App\Post', 'reply_id', 'id')->orderBy('id','desc');
+    }
+
+    static function addPost($request, $reply_id = 0)
     {
         $post = Post::create([
             'reply_id' => $reply_id,
@@ -53,4 +59,3 @@ class Post extends Model
         ]);
     }
 }
-
