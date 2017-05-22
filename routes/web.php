@@ -27,3 +27,4 @@ Route::delete('/{id}', 'PostController@delete');
 // Reply
 Route::get('/{id}/reply', 'BbsController@replyPage');
 Route::post('/replyPost', 'PostController@replyCreate');
+Route::get('/{id}/replyList', 'BbsController@replyList');
