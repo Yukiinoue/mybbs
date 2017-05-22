@@ -11,6 +11,10 @@
         {!! Form::text('password', null,['class' => 'form-control']) !!}
     </div>
     <div class="form-group">
+        {!! Form::label('files', 'ファイルアップロード') !!}
+        {!! Form::file('files') !!}
+    </div>
+    <div class="form-group">
         {!! Form::label('posted_at', '公開日:') !!}
         {!! Form::input('date', 'posted_at', $posted_at, ['class' => 'form-control']) !!}
     </div>
