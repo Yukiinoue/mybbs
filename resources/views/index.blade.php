@@ -3,7 +3,7 @@
 @section('content')
     <h1>井上のBBS</h1>
     @include('errors.form_errors')
-    {!! Form::open(array('action' => 'PostController@create')) !!}
+    {!! Form::open(array('action' => 'PostController@create', 'files' => true)) !!}
         @include('form',['posted_at' => date('Y-m-d'), 'submitButton' => '新規投稿'])
     {!! Form::close() !!}
 

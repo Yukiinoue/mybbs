@@ -1,10 +1,11 @@
+    <input type="hidden" name="MAX_FILE_SIZE" value="41943040" />
     <div class="form-group">
         {!! Form::label('name', '名前:') !!}
-        {!! Form::text('name', null,['class' => 'form-control']) !!}
+        {!! Form::text('name', '名前を入力してください。',['class' => 'form-control']) !!}
     </div>
     <div class="form-group">
         {!! Form::label('body', '本文:') !!}
-        {!! Form::textarea('body', null,['class' => 'form-control']) !!}
+        {!! Form::textarea('body', '本文を入力してください。',['class' => 'form-control']) !!}
     </div>
     <div class="form-group">
         {!! Form::label('password', 'パスワード:') !!}
@@ -12,7 +13,7 @@
     </div>
     <div class="form-group">
         {!! Form::label('files', 'ファイルアップロード') !!}
-        {!! Form::file('files') !!}
+        {!! Form::file('files', null,['class' => 'form-control']) !!}
     </div>
     <div class="form-group">
         {!! Form::label('posted_at', '公開日:') !!}
