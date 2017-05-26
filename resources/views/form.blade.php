@@ -13,7 +13,7 @@
     </div>
     <div class="form-group">
         {!! Form::label('files', 'ファイルアップロード') !!}
-        {!! Form::file('files', null,['class' => 'form-control']) !!}
+        {!! Form::file('files[]', null,['class' => 'form-control']) !!}
     </div>
     <div class="form-group">
         {!! Form::label('posted_at', '公開日:') !!}
