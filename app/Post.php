@@ -57,5 +57,22 @@ class Post extends Model
             'password' => $request['password'],
             'posted_at' => Carbon::today(),
         ]);
+
+        if(isset($request['files']))
+        {
+            foreach($request['files'] as $value)
+            {
+                $file = file_get_contents($value);
+                $mime = $value->getClientMimeType();
+                $name = $value->getClientOriginalName();
+
+                File::create([
+                    'post_id' => $post->id,
+                    'file_name' => $name,
+                    'contents' => $file,
+                    'type' => $mime,
+                ]);
+            }
+        }
     }
 }
