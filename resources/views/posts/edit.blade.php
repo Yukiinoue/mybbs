@@ -8,7 +8,7 @@
 
 @include('errors.form_errors')
 
-    {!! Form::model($post, ['method' => 'PATCH', 'url' => ['/', $post->id]]) !!}
+    {!! Form::model($post, ['method' => 'PATCH', 'url' => ['/', $post->id], 'files' => true]) !!}
         @include('form', ['posted_at' => $post->posted_at->format('Y-m-d'), 'submitButton' => '編集'])
     {!! Form::close() !!}
 @endsection
