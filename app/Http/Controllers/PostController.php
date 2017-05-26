@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Log;
+
 use App\Post;
 use App\File;
 
@@ -15,7 +17,7 @@ class PostController extends Controller
 {
     public function create(PostRequest $request)
     {
-        Post::create($request->all());
+        Post::addPost($request->all());
 
         \Session::flash('flash_message', '記事を作成しました。');
 
