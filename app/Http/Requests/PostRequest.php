@@ -28,6 +28,8 @@ class PostRequest extends FormRequest
             'body' => 'required',
             'password' => 'required|between: 4,32',
             'posted_at' => 'required',
+            'files' => 'sometimes|array|max:3',
+            'files.*' => 'sometimes|max:40960|mimes:jpeg,gif,png,mp4,quicktime',
         ];
     }
 }
